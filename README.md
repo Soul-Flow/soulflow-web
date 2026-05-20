@@ -13,20 +13,21 @@ powershell -c "irm bun.sh/install.ps1 | iex"
 # MacOS
 curl -fsSL https://bun.sh/install | bash
 
+# Setup
 **Bước 1: Clone dự án về máy**
-\`\`\`bash
+\`\`\`
 git clone https://github.com/nhockevin/flowershop-fe.git
 cd flowershop-fe
 \`\`\`
 
 **Bước 2: Cài đặt thư viện**
 Hệ thống sẽ tự động đọc file `bun.lockb` để cài đặt đúng phiên bản:
-\`\`\`bash
+\`\`\`
 bun install
 \`\`\`
 
 **Bước 3: Khởi chạy môi trường Dev**
-\`\`\`bash
+\`\`\`
 bun dev
 \`\`\`
 Mở trình duyệt và truy cập: [http://localhost:3000](http://localhost:3000)
