@@ -1,4 +1,4 @@
-# 🌸 SoulFlow - CMS (`soulflow-cms`)
+# 🌸 SoulFlow - Web (`soulflow-web`)
 
 Dự án tốt nghiệp: Website Cửa hàng hoa.
 Mã nguồn Frontend được xây dựng bằng **Next.js (App Router)** và quản lý gói bằng **Bun**.

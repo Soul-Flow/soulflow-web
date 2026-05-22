@@ -1,26 +1,42 @@
 @import "tailwindcss";
 
+/* LIGHT THEME (Sáng rực rỡ, nền trắng kem) */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+	--sf-bg: #fcfaf7;
+	--sf-bg-elevated: #ffffff;
+	--sf-fg: #1f1a16;
+	--sf-fg-muted: #666666;
+	--sf-accent: #c49b83;
+	--sf-border: #ebe5da;
+	--sf-surface: #f3efe8;
+}
+
+/* DARK THEME (Tối) */
+.dark {
+	--sf-bg: #0a0a0a;
+	--sf-bg-elevated: #161616;
+	--sf-fg: #faf9f5;
+	--sf-fg-muted: #a0a0a0;
+	--sf-accent: #c49b83;
+	--sf-border: #222222;
+	--sf-surface: #111111;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+	--color-sf-bg: var(--sf-bg);
+	--color-sf-bg-elevated: var(--sf-bg-elevated);
+	--color-sf-fg: var(--sf-fg);
+	--color-sf-fg-muted: var(--sf-fg-muted);
+	--color-sf-accent: var(--sf-accent);
+	--color-sf-border: var(--sf-border);
+	--color-sf-surface: var(--sf-surface);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+html { color-scheme: light; font-size: 120%;}
+html.dark { color-scheme: dark; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	background-color: var(--sf-bg);
+	color: var(--sf-fg);
+	transition: background-color 0.3s ease, color 0.3s ease;
 }
