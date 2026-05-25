@@ -9,6 +9,7 @@ import {
 	X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
@@ -37,6 +38,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 	const isBespoke = pathname === boutiqueRoutes.bespoke;
 	const isContact = pathname === boutiqueRoutes.contact;
 	const isAccount = pathname === boutiqueRoutes.account;
+	const isAbout = pathname === boutiqueRoutes.about;
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
@@ -118,7 +120,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 								isHome ? "text-sf-accent" : "text-sf-fg-muted hover:text-sf-fg"
 							}`}
 						>
-							Home Atelier
+							Trang Chủ
 							{isHome && (
 								<motion.span
 									layoutId="navUnderline"
@@ -153,7 +155,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 										: "text-sf-fg-muted hover:text-sf-fg"
 								}`}
 							>
-								Botanical Shop
+								Sản Phẩm
 								<ChevronDown className="h-3 w-3 text-sf-accent" />
 								{isCatalog && (
 									<motion.span
@@ -213,7 +215,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 							}`}
 						>
 							<Sparkles className="h-3 w-3 animate-pulse text-sf-accent" />
-							Bespoke Design
+							Thiết Kế Riêng
 							{isBespoke && (
 								<motion.span
 									layoutId="navUnderline"
@@ -233,8 +235,25 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 									: "text-sf-fg-muted hover:text-sf-fg"
 							}`}
 						>
-							Contact Us
+							Liên Hệ
 							{isContact && (
+								<motion.span
+									layoutId="navUnderline"
+									className="absolute bottom-0 left-3 right-3 h-0.5 bg-sf-accent"
+									transition={{ type: "spring", stiffness: 380, damping: 30 }}
+								/>
+							)}
+						</Link>
+
+						<Link
+							id="nav-link-about"
+							href={boutiqueRoutes.about}
+							className={`relative px-3 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
+								isAbout ? "text-sf-accent" : "text-sf-fg-muted hover:text-sf-fg"
+							}`}
+						>
+							Về Chúng Tôi
+							{isAbout && (
 								<motion.span
 									layoutId="navUnderline"
 									className="absolute bottom-0 left-3 right-3 h-0.5 bg-sf-accent"
@@ -279,12 +298,17 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 								isAccount ? "ring-2 ring-sf-accent" : ""
 							}`}
 						>
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
+							<Image
 								src={user.avatar}
 								alt={user.name}
 								className="h-7 w-7 rounded-full object-cover grayscale brightness-105 border border-sf-border"
 								referrerPolicy="no-referrer"
+								width={25}
+								height={25}
+								priority
+								placeholder="blur"
+								blurDataURL="/images/avatar-placeholder.png"
+								loading="eager"
 							/>
 							<span className="hidden lg:inline text-sm font-bold tracking-widest text-sf-fg uppercase">
 								{user.name.split(" ")[0]}
@@ -365,7 +389,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 										: "text-sf-fg-muted hover:bg-sf-surface"
 								}`}
 							>
-								Home Atelier
+								Trang Chủ
 							</Link>
 
 							{/* Catalog Categories Trigger */}
@@ -405,7 +429,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 								}`}
 							>
 								<Sparkles className="h-4 w-4 text-sf-accent" />
-								Bespoke Design
+								Thiết Kế Riêng
 							</Link>
 
 							{/* Contact us */}

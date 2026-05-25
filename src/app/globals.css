@@ -1,6 +1,5 @@
 @import "tailwindcss";
 
-/* LIGHT THEME (Sáng rực rỡ, nền trắng kem) */
 :root {
 	--sf-bg: #fcfaf7;
 	--sf-bg-elevated: #ffffff;
@@ -11,7 +10,6 @@
 	--sf-surface: #f3efe8;
 }
 
-/* DARK THEME (Tối) */
 .dark {
 	--sf-bg: #0a0a0a;
 	--sf-bg-elevated: #161616;
@@ -32,11 +30,18 @@
 	--color-sf-surface: var(--sf-surface);
 }
 
-html { color-scheme: light; font-size: 120%;}
-html.dark { color-scheme: dark; }
+html {
+	color-scheme: light;
+	font-size: 120%;
+}
+html.dark {
+	color-scheme: dark;
+}
 
 body {
 	background-color: var(--sf-bg);
 	color: var(--sf-fg);
-	transition: background-color 0.3s ease, color 0.3s ease;
+	transition:
+		background-color 0.3s ease,
+		color 0.3s ease;
 }
