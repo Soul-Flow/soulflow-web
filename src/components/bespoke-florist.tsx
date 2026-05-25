@@ -8,6 +8,7 @@ import {
 	Sparkles,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import type React from "react";
 import { useState } from "react";
 import { useBoutiqueStore } from "@/store/boutique-store";
@@ -26,9 +27,10 @@ export function BespokeFlorist() {
 	>("Pastel");
 	const [occasion] = useState<string>("Wedding Anniversary");
 	const [floristMessage, setFloristMessage] = useState<string>("");
-	const [includeVase, setIncludeVase] = useState<boolean>(true);
-	const [referenceStyle, setReferenceStyle] =
-		useState<string>("French Atelier");
+	const [includeVase] = useState<boolean>(true);
+
+	// State mới cho Category / Loại hoa
+	const [category, setCategory] = useState<string>("All");
 
 	const colorTones = [
 		{
@@ -57,31 +59,25 @@ export function BespokeFlorist() {
 		},
 	];
 
-	const styleGuides = [
-		{
-			id: "French Atelier",
-			name: "Claude Monet Meadow",
-			desc: "Loose, organic, wildflower aesthetics.",
-		},
-		{
-			id: "Minimalist Tokyo",
-			name: "Sogetsu Ikebana",
-			desc: "Sculptural lines and ample negative space.",
-		},
-		{
-			id: "Classic Paris",
-			name: "Maison Opulence",
-			desc: "Tight, dense imperial spiral dome roses.",
-		},
+	// Danh mục hoa (Mốt bạn map cái này với API GET /categories từ bảng Categories)
+	const flowerCategories = [
+		{ id: "All", name: "Tùy ý Designer (Mix)" },
+		{ id: "Roses", name: "Hoa Hồng (Roses)" },
+		{ id: "Peonies", name: "Mẫu Đơn (Peonies)" },
+		{ id: "Tulips", name: "Tulip Hiện Đại" },
+		{ id: "Orchids", name: "Hoa Lan Sang Trọng" },
 	];
 
 	const handleConsult = async (e: React.FormEvent) => {
 		e.preventDefault();
+		// Mốt khi có Backend, bạn sẽ gọi API ở đây:
+		// fetch(`/api/products/suggest?budget=${budget}&tone=${tone}&category=${category === 'All' ? '' : category}`)
+
 		await submitBespokeRequest({
 			budget,
 			tone,
 			occasion,
-			floristMessage: floristMessage + ` (Reference Style: ${referenceStyle})`,
+			floristMessage: `${floristMessage}·(Preferred·Category:·${category})`,
 			includeArrangementVase: includeVase,
 		});
 	};
@@ -92,15 +88,14 @@ export function BespokeFlorist() {
 			<div className="text-center space-y-2 mb-12">
 				<div className="inline-flex items-center gap-1.5 rounded-full bg-[#C49B83]/10 border border-[#C49B83]/30 px-3 py-1 text-sm uppercase tracking-widest font-bold text-[#C49B83]">
 					<Sparkles className="h-3 w-3 animate-spin" />
-					AI FLORAL COUTURE
+					Gợi Ý Thông Minh
 				</div>
 				<h1 className="font-serif text-3xl sm:text-4xl font-light text-sf-fg">
-					Bespoke Floral Design
+					Tìm Kiếm Hoa Hoàn Hảo
 				</h1>
 				<p className="max-w-md mx-auto text-xs text-[#666666] dark:text-[#A0A0A0] font-light">
-					Co-create a masterfully tailored centerpiece with SoulFlow’s
-					Gemini-powered design atelier. Input your specifications, budget and
-					layout mood below.
+					Nhập ngân sách, chọn tone màu và loài hoa yêu thích. Hệ thống của
+					SoulFlow sẽ tự động quét kho và gợi ý thiết kế phù hợp nhất cho bạn.
 				</p>
 			</div>
 
@@ -112,7 +107,7 @@ export function BespokeFlorist() {
 						<div className="space-y-2">
 							<div className="flex justify-between items-center">
 								<h3 className="text-xs font-bold uppercase tracking-widest text-sf-fg block">
-									Design Budget
+									Ngân Sách Của Bạn
 								</h3>
 								<div className="flex items-center text-sm font-semibold text-[#C49B83]">
 									<DollarSign className="h-4.5 w-4.5" />
@@ -129,16 +124,16 @@ export function BespokeFlorist() {
 								onChange={(e) => setBudget(Number(e.target.value))}
 								className="w-full h-1.5 bg-[#EBE5DA] dark:bg-[#2C2C2C] rounded-lg appearance-none cursor-pointer accent-[#C49B83]"
 							/>
-							<div className="flex justify-between text-sm text-[#A0A0A0]">
-								<span>Petite Garden ($50)</span>
-								<span>Lavish Opulence ($500)</span>
+							<div className="flex justify-between text-xs text-[#A0A0A0]">
+								<span>Bó nhỏ ($50)</span>
+								<span>Thiết kế cao cấp ($500)</span>
 							</div>
 						</div>
 
 						{/* Swatch color tones */}
 						<div className="space-y-3">
 							<h3 className="text-xs font-bold uppercase tracking-widest text-sf-fg block">
-								Color Tone Archetype
+								Tone Màu Yêu Thích
 							</h3>
 							<div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
 								{colorTones.map((t) => {
@@ -159,7 +154,7 @@ export function BespokeFlorist() {
 												<span className="block text-xs font-semibold text-sf-fg">
 													{t.label}
 												</span>
-												<span className="block text-xs text-[#888888] font-light">
+												<span className="block text-[10px] text-[#888888] font-light uppercase tracking-wider">
 													{t.labelVN}
 												</span>
 
@@ -184,27 +179,26 @@ export function BespokeFlorist() {
 							</div>
 						</div>
 
-						{/* Design reference styles */}
+						{/* Category Filters */}
 						<div className="space-y-3">
 							<h3 className="text-xs font-bold uppercase tracking-widest text-sf-fg block">
-								Reference Motif Style
+								Danh Mục / Loài Hoa Chủ Đạo
 							</h3>
 							<div className="flex gap-2 flex-wrap">
-								{styleGuides.map((style) => {
-									const isSelected = referenceStyle === style.id;
+								{flowerCategories.map((cat) => {
+									const isSelected = category === cat.id;
 									return (
 										<button
-											id={`style-btn-${style.id.toLowerCase().replace(/\s+/g, "-")}`}
-											key={style.id}
+											key={cat.id}
 											type="button"
-											onClick={() => setReferenceStyle(style.id)}
+											onClick={() => setCategory(cat.id)}
 											className={`px-4 py-2 text-xs font-semibold tracking-wider rounded-lg border text-left transition-all ${
 												isSelected
 													? "border-[#C49B83] bg-[#C49B83]/5 text-[#C49B83]"
 													: "border-sf-border text-[#666666] dark:text-[#A0A0A0] hover:border-[#C49B83]"
 											}`}
 										>
-											{style.name}
+											{cat.name}
 										</button>
 									);
 								})}
@@ -217,34 +211,15 @@ export function BespokeFlorist() {
 								htmlFor="bespoke-message-input"
 								className="text-xs font-bold uppercase tracking-widest text-sf-fg block"
 							>
-								Occasion and Florist Notes
+								Ghi Chú Thêm Hoặc Dịp Tặng
 							</label>
 							<textarea
 								id="bespoke-message-input"
-								rows={3}
+								rows={2}
 								value={floristMessage}
 								onChange={(e) => setFloristMessage(e.target.value)}
-								placeholder="Declare an occasion (e.g. Wedding, Velvet Anniversary) or list desired flowers (e.g. Include some white hydrangeas, no baby breath...)"
-								className="w-full text-xs rounded-xl border border-sf-border bg-sf-bg-elevated text-sf-fg placeholder:text-sf-fg-muted p-3 outline-none focus:border-sf-accent focus:ring-1 focus:ring-sf-accent transition-all duration-200"
-							/>
-						</div>
-
-						{/* Vase switch */}
-						<div className="flex items-center justify-between p-3.5 rounded-xl border border-sf-border">
-							<div className="space-y-0.5">
-								<span className="text-xs font-semibold text-sf-fg block">
-									Include Crystal Vase
-								</span>
-								<span className="text-sm text-[#888888] font-light leading-none block">
-									Comes condition-prepped in French organic plant food.
-								</span>
-							</div>
-							<input
-								id="bespoke-vase-checkbox"
-								type="checkbox"
-								checked={includeVase}
-								onChange={(e) => setIncludeVase(e.target.checked)}
-								className="h-4.5 w-4.5 rounded border-[#C49B83] dark:border-[#222222] text-[#C49B83] focus:ring-[#C49B83] cursor-pointer"
+								placeholder="VD: Kỷ niệm ngày cưới, hoa tặng mẹ, không dùng hoa baby..."
+								className="w-full text-xs rounded-xl border border-sf-border bg-transparent text-sf-fg placeholder:text-gray-500 p-3 outline-none focus:border-[#C49B83] transition-colors resize-none"
 							/>
 						</div>
 
@@ -258,12 +233,12 @@ export function BespokeFlorist() {
 							{loadingConsultation ? (
 								<>
 									<RefreshCw className="h-4 w-4 animate-spin text-[#C49B83]" />
-									Styling Botanical Formula...
+									Đang tìm kiếm sản phẩm...
 								</>
 							) : (
 								<>
 									<Sparkles className="h-4 w-4 text-[#C49B83]" />
-									Design Bouquet with Gemini Florist
+									Gợi Ý Sản Phẩm Cho Tôi
 								</>
 							)}
 						</button>
@@ -288,16 +263,12 @@ export function BespokeFlorist() {
 								</div>
 								<div className="space-y-2">
 									<h3 className="font-serif text-lg text-sf-fg">
-										Curating Harmonious Specimens...
+										Đang quét kho sản phẩm...
 									</h3>
-									<p className="text-[11px] text-[#888888] max-w-sm mx-auto font-light leading-relaxed">
-										Analyzing matching seasonal flower species, calculating
-										aesthetic geometry for a budget of{" "}
-										<span className="font-bold text-[#1A1A1A] dark:text-white">
-											${budget}
-										</span>
-										, and coordinating color chromatics under the Victorian
-										flower code.
+									<p className="text-xs text-[#888888] max-w-sm mx-auto font-light leading-relaxed">
+										Hệ thống đang tìm kiếm các mẫu hoa mang tone màu {tone},
+										thuộc danh mục {category === "All" ? "Mix" : category} với
+										mức giá lý tưởng nhất sát với ${budget}.
 									</p>
 								</div>
 
@@ -317,121 +288,77 @@ export function BespokeFlorist() {
 								initial={{ opacity: 0, y: 15 }}
 								animate={{ opacity: 1, y: 0 }}
 								transition={{ duration: 0.5 }}
-								className="bg-[#1A1A1A] dark:bg-[#161616] p-6 sm:p-8 rounded-2xl border border-[#C49B83]/40 text-white shadow-xl space-y-6"
+								className="bg-sf-bg-elevated overflow-hidden rounded-2xl border border-[#C49B83]/40 text-sf-fg shadow-xl flex flex-col"
 							>
-								{/* Header Output block */}
-								<div className="border-b border-[#C49B83]/30 pb-4">
-									<div className="flex items-center gap-2 text-sm text-[#C49B83] font-bold tracking-widest uppercase mb-1">
-										<Sparkles className="h-3.5 w-3.5 text-[#C49B83]" />
-										Atelier Formula Decoded
-									</div>
-									<h2 className="font-serif text-2xl font-light tracking-tight text-[#EAE8E4]">
-										{bespokeConsultationResult.bouquetName}
-									</h2>
-
-									{/* Chroma Palette Display */}
-									<div className="flex items-center gap-1.5 mt-2.5">
-										<span className="text-xs uppercase font-bold text-[#A0A0A0] tracking-wider mr-1">
-											Chroma Palette:
-										</span>
-										{bespokeConsultationResult.moodPalette.map((col) => (
-											<span
-												key={col}
-												className="h-4.5 w-4.5 rounded-full border border-black/30 shadow-xs"
-												style={{ backgroundColor: col }}
-												title={col}
-											/>
-										))}
+								{/* Chỗ này mốt sẽ render ảnh thật của Product từ DB lên */}
+								<div className="h-48 w-full relative overflow-hidden bg-white/5">
+									<Image
+										src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=800"
+										alt="Suggested Product"
+										fill
+										className="w-full h-full object-cover opacity-80"
+									/>
+									<div className="absolute top-4 left-4 bg-black/60 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest text-[#C49B83] border border-[#C49B83]/30">
+										Độ phù hợp: 98%
 									</div>
 								</div>
 
-								{/* Narrative description */}
-								<div className="space-y-1.5 text-xs font-light text-[#CCCCCC]">
-									<span className="text-xs uppercase tracking-widest text-[#C49B83] font-bold">
-										Aesthetic Expression
-									</span>
-									<p className="leading-relaxed italic font-serif">
-										&quot;{bespokeConsultationResult.aestheticDescription}&quot;
-									</p>
-								</div>
-
-								{/* Specific recommended blooms list */}
-								<div className="space-y-3.5">
-									<span className="text-xs uppercase tracking-widest text-[#C49B83] font-bold block">
-										Specimen Breakdown
-									</span>
-									<div className="space-y-3">
-										{bespokeConsultationResult.suggestedBlooms.map((bloom) => (
-											<div
-												key={`${bloom.name}-${bloom.symbolism}`}
-												className="bg-black/30 rounded-xl p-3 border border-white/5 space-y-1"
-											>
-												<div className="flex items-center justify-between">
-													<h4 className="font-serif text-sm font-semibold text-[#EAE8E4]">
-														{bloom.name}
-													</h4>
-													<span className="text-[8px] tracking-widest uppercase bg-white/10 px-2 py-0.5 rounded-full text-[#C49B83]">
-														Meaningful Pick
-													</span>
-												</div>
-												<p className="text-[11px] text-[#A0A0A0] font-light leading-relaxed">
-													<strong className="text-white">Design Role:</strong>{" "}
-													{bloom.reasoning}
-												</p>
-												<p className="text-[11px] text-[#C49B83] italic">
-													&quot;{bloom.symbolism}&quot;
-												</p>
-											</div>
-										))}
+								<div className="p-6 sm:p-8 space-y-6">
+									<div className="border-b border-[#C49B83]/30 pb-4">
+										<h2 className="font-serif text-2xl font-light tracking-tight text-sf-fg">
+											{bespokeConsultationResult.bouquetName}
+										</h2>
+										<p className="text-xs text-[#A0A0A0] mt-1 italic">
+											Mã SP: PRD-AI-01 (Lấy từ DB)
+										</p>
 									</div>
-								</div>
 
-								{/* Care Guide / floristry assemble instructions */}
-								<div className="bg-black/20 rounded-xl p-4 border border-white/5 space-y-1">
-									<span className="text-xs uppercase tracking-widest text-[#C49B83] font-bold block">
-										Master Florist Placement Note
-									</span>
-									<p className="text-[11px] text-[#CCCCCC] font-mono leading-relaxed">
-										{bespokeConsultationResult.floristGuideText}
-									</p>
-								</div>
-
-								{/* Order trigger */}
-								<div className="pt-4 flex items-center justify-between border-t border-white/5">
-									<div>
-										<span className="text-xs text-[#888888] uppercase block">
-											Bespoke Price
-										</span>
-										<span className="text-xl font-bold font-sans text-[#EAE8E4]">
-											${budget}
-										</span>
+									{/* Narrative description */}
+									<div className="space-y-1.5 text-xs font-light text-sf-fg">
+										<p className="leading-relaxed font-sans text-sm">
+											{bespokeConsultationResult.aestheticDescription}
+										</p>
 									</div>
-									<button
-										type="button"
-										id="bespoke-order-btn"
-										onClick={() => {
-											const mockFlower = {
-												id: "custom-bespoke-item",
-												name: bespokeConsultationResult.bouquetName,
-												scientificName: "Flora Artisana custom-built",
-												priceSmall: budget,
-												priceMedium: budget,
-												priceLarge: budget,
-												description:
-													bespokeConsultationResult.aestheticDescription,
-												category: "Bespoke Curation",
-												symbolism: "Custom design",
-												careGuide: bespokeConsultationResult.floristGuideText,
-												image:
-													"https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=600",
-												popular: false,
-											};
-											addToCart(mockFlower, "M");
-										}}
-										className="flex items-center gap-1 px-5 py-3 rounded-xl bg-[#C49B83] hover:bg-[#C49B83]/90 text-white text-xs font-bold uppercase tracking-widest transition-colors"
-									>
-										Add This Custom Design to Shopping Bag
-									</button>
+
+									{/* Order trigger */}
+									<div className="pt-4 flex items-center justify-between border-t border-white/5">
+										<div>
+											<span className="text-xs text-[#888888] uppercase block">
+												Giá Bán
+											</span>
+											<span className="text-xl font-bold font-sans text-[#C49B83]">
+												${budget}
+											</span>
+										</div>
+										<button
+											type="button"
+											id="bespoke-order-btn"
+											onClick={() => {
+												// Mốt thay vì mockFlower, bạn bỏ nguyên cái Object Product từ DB vào addToCart
+												const dbProduct = {
+													id: "product-id-from-db",
+													name: bespokeConsultationResult.bouquetName,
+													scientificName: "Sản phẩm gợi ý",
+													priceSmall: budget,
+													priceMedium: budget,
+													priceLarge: budget,
+													description:
+														bespokeConsultationResult.aestheticDescription,
+													category: category,
+													symbolism: "",
+													careGuide: "",
+													image:
+														"https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=600",
+													popular: false,
+												};
+												addToCart(dbProduct, "M");
+											}}
+											className="flex items-center gap-2 px-5 py-3 rounded-xl bg-[#C49B83] hover:bg-[#A37B65] text-sf-fg text-xs font-bold uppercase tracking-widest transition-colors shadow-lg"
+										>
+											<Sparkles className="h-4 w-4" />
+											Thêm Vào Giỏ
+										</button>
+									</div>
 								</div>
 							</motion.div>
 						)}
@@ -446,18 +373,17 @@ export function BespokeFlorist() {
 							>
 								<Sparkles className="h-10 w-10 text-[#C49B83] opacity-65 mb-4 animate-bounce" />
 								<h3 className="font-serif text-lg text-sf-fg">
-									Atelier Formula Workspace
+									Hệ Thống Phân Tích Dữ Liệu
 								</h3>
 								<p className="max-w-xs text-xs text-[#666666] dark:text-[#A0A0A0] font-light leading-relaxed mt-1.5">
-									Configure your bespoke budget, color chromatics, and written
-									wishes, then trigger our AI design system to co-create a
-									breathtaking arrangement recipe tailored uniquely for you.
+									Thiết lập các tiêu chí của bạn ở cột bên trái. Công cụ sẽ đối
+									chiếu với cơ sở dữ liệu hàng trăm mẫu hoa đang có tại Boutique
+									để đưa ra kết quả hoàn hảo nhất.
 								</p>
-								<div className="mt-4 flex items-center gap-1.5 p-3 rounded-lg border border-sf-border max-w-70">
+								<div className="mt-4 flex items-center justify-center gap-1.5 p-3 rounded-lg border border-sf-border max-w-70 w-full bg-[#C49B83]/5">
 									<Info className="h-3.5 w-3.5 text-[#C49B83] shrink-0" />
-									<span className="text-sm text-[#A0A0A0] text-left leading-normal font-light block">
-										Secure AI Consultation uses high-grade models directly
-										proxying credentials safely on Cloud.
+									<span className="text-xs text-[#666666] dark:text-[#A0A0A0] leading-normal font-medium block">
+										Kết quả tìm kiếm theo thời gian thực.
 									</span>
 								</div>
 							</motion.div>
