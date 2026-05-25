@@ -1,14 +1,7 @@
 "use client";
 
-import {
-	AlertCircle,
-	Bell,
-	CheckCircle,
-	RefreshCcw,
-	Shield,
-	ShoppingBag,
-	User,
-} from "lucide-react";
+import { Bell, CheckCircle, Shield, ShoppingBag, User } from "lucide-react";
+import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { useBoutiqueStore } from "@/store/boutique-store";
@@ -59,11 +52,13 @@ export function MyAccount() {
 		<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-sf-bg-elevated transition-colors duration-300">
 			{/* Header Profile Summary cards */}
 			<div className="flex flex-col md:flex-row items-center gap-6 mb-12 p-6 rounded-2xl bg-sf-bg-elevated border border-sf-border shadow-sm">
-				<img
+				<Image
 					src={user.avatar}
 					alt={user.name}
 					className="h-20 w-20 rounded-full object-cover grayscale brightness-105 border border-sf-border"
 					referrerPolicy="no-referrer"
+					width={80}
+					height={80}
 				/>
 				<div className="text-center md:text-left space-y-1.5 flex-1">
 					<div className="flex flex-wrap justify-center md:justify-start items-center gap-2">
@@ -75,7 +70,7 @@ export function MyAccount() {
 						</span>
 					</div>
 					<p className="text-xs text-[#666666] dark:text-[#A0A0A0] font-light">
-						Customer Profile registered since{" "}
+						Thành viên đăng ký từ{" "}
 						<strong className="font-semibold text-black dark:text-white">
 							{user.joinedDate}
 						</strong>
@@ -86,7 +81,7 @@ export function MyAccount() {
 				{/* Global Dark Mode settings button */}
 				<div className="flex flex-col items-center md:items-end gap-1 border-t md:border-t-0 md:border-l border-sf-border pt-4 md:pt-0 md:pl-6">
 					<span className="text-sm text-[#888888] uppercase tracking-widest block font-bold">
-						Preferences
+						Giao diện
 					</span>
 					<button
 						id="account-mode-switcher-btn"
@@ -112,7 +107,7 @@ export function MyAccount() {
 					<div className="bg-sf-bg-elevated p-6 rounded-2xl border border-sf-border shadow-xs space-y-4">
 						<h2 className="font-serif text-lg font-semibold text-sf-fg flex items-center gap-2 border-b border-sf-border pb-3">
 							<User className="h-4.5 w-4.5 text-[#C49B83]" />
-							Personal Credentials Information
+							Thông Tin Cá Nhân
 						</h2>
 
 						<form onSubmit={handleUpdateProfile} className="space-y-4">
@@ -122,7 +117,7 @@ export function MyAccount() {
 										htmlFor="user-profile-name"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										Full Name
+										Họ và Tên
 									</label>
 									<input
 										id="user-profile-name"
@@ -139,7 +134,7 @@ export function MyAccount() {
 										htmlFor="user-profile-phone"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										Phone Number
+										Số Điện Thoại
 									</label>
 									<input
 										id="user-profile-phone"
@@ -157,7 +152,7 @@ export function MyAccount() {
 									htmlFor="user-profile-email"
 									className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 								>
-									Primary Contact Email
+									Email Liên Hệ
 								</label>
 								<input
 									id="user-profile-email"
@@ -172,12 +167,13 @@ export function MyAccount() {
 							{/* Notification toggle switch */}
 							<div className="flex items-center justify-between p-3.5 rounded-xl border border-sf-border">
 								<div className="space-y-0.5">
-									<span className="text-xs font-semibold text-sf-fg block flex items-center gap-1">
+									<span className="text-xs font-semibold text-sf-fg block items-center gap-1">
 										<Bell className="h-3.5 w-3.5 text-[#C49B83]" />
-										Email Care Instructions
+										Đăng Ký Nhận Thông Báo
 									</span>
 									<span className="text-sm text-[#888888] font-light leading-none block">
-										Weekly preservation guidelines, flower symbolism stories
+										Mỗi khi có cập nhật về đơn hàng hoặc chương trình khuyến mãi
+										mới, bạn sẽ nhận được thông báo qua email hoặc tin nhắn.
 									</span>
 								</div>
 								<input
@@ -195,11 +191,12 @@ export function MyAccount() {
 									type="submit"
 									className="rounded-lg bg-[#C49B83] hover:bg-[#C49B83]/90 text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 transition-colors shadow-sm"
 								>
-									Save Profile Settings
+									Lưu Thay Đổi
 								</button>
 								{updateFeedback && (
 									<span className="text-sm text-green-500 font-bold uppercase flex items-center gap-1">
-										<CheckCircle className="h-4 w-4" /> Credentials Updated!
+										<CheckCircle className="h-4 w-4" /> Thông Tin Cập Nhật Thành
+										Công!
 									</span>
 								)}
 							</div>
@@ -210,7 +207,7 @@ export function MyAccount() {
 					<div className="bg-sf-bg-elevated p-6 rounded-2xl border border-sf-border shadow-xs space-y-4">
 						<h2 className="font-serif text-lg font-semibold text-sf-fg flex items-center gap-2 border-b border-sf-border pb-3">
 							<Shield className="h-4.5 w-4.5 text-[#C49B83]" />
-							Atelier Security Password
+							Bảo Mật Tài Khoản
 						</h2>
 
 						<form onSubmit={handleChangePassword} className="space-y-4">
@@ -220,7 +217,7 @@ export function MyAccount() {
 										htmlFor="old-pw"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										Current Password
+										Mật Khẩu Hiện Tại
 									</label>
 									<input
 										id="old-pw"
@@ -229,7 +226,7 @@ export function MyAccount() {
 										value={oldPassword}
 										onChange={(e) => setOldPassword(e.target.value)}
 										placeholder="••••••••"
-										className="w-full text-xs rounded-lg border border-sf-border border-sf-border text-sf-fg p-3 outline-none focus:border-[#C49B83]"
+										className="w-full text-xs rounded-lg border border-sf-border text-sf-fg p-3 outline-none focus:border-[#C49B83]"
 									/>
 								</div>
 
@@ -238,7 +235,7 @@ export function MyAccount() {
 										htmlFor="new-pw"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										New Password
+										Mật Khẩu Mới
 									</label>
 									<input
 										id="new-pw"
@@ -247,7 +244,7 @@ export function MyAccount() {
 										value={newPassword}
 										onChange={(e) => setNewPassword(e.target.value)}
 										placeholder="Minimum 8 characters"
-										className="w-full text-xs rounded-lg border border-sf-border border-sf-border text-sf-fg p-3 outline-none focus:border-[#C49B83]"
+										className="w-full text-xs rounded-lg border border-sf-border text-sf-fg p-3 outline-none focus:border-[#C49B83]"
 									/>
 								</div>
 							</div>
@@ -258,12 +255,12 @@ export function MyAccount() {
 									type="submit"
 									className="rounded-lg bg-[#C49B83] hover:bg-[#C49B83]/90 text-white text-xs font-bold uppercase tracking-widest px-5 py-2.5 transition-colors shadow-sm"
 								>
-									Change Password
+									Đổi Mật Khẩu
 								</button>
 								{passwordFeedback && (
 									<span className="text-sm text-green-500 font-bold uppercase flex items-center gap-1">
-										<CheckCircle className="h-4 w-4" /> Password Reset
-										Successful!
+										<CheckCircle className="h-4 w-4" />
+										Mật Khẩu Đã Được Cập Nhật!
 									</span>
 								)}
 							</div>
@@ -277,7 +274,7 @@ export function MyAccount() {
 					<div className="bg-sf-bg-elevated p-6 rounded-2xl border border-sf-border shadow-xs space-y-4">
 						<h2 className="font-serif text-lg font-semibold text-sf-fg pb-3 border-b border-sf-border flex items-center gap-2">
 							<ShoppingBag className="h-4.5 w-4.5 text-[#C49B83]" />
-							Historic Activity Logs
+							Lịch Sử Đơn Hàng
 						</h2>
 
 						<div className="space-y-4">
@@ -329,7 +326,7 @@ export function MyAccount() {
 									<div className="flex justify-between items-center text-xs border-t border-[#EBE5DA]/50 dark:border-[#2C2C2C]/50 pt-2.5">
 										<span className="text-[#A0A0A0]">{order.date}</span>
 										<span className="font-sans font-bold text-sm text-[#C49B83]">
-											Total: ${order.totalAmount}
+											Tổng Cộng: ${order.totalAmount}
 										</span>
 									</div>
 								</div>
@@ -338,7 +335,7 @@ export function MyAccount() {
 					</div>
 
 					{/* Care Subscriptions scheduled care guides block */}
-					<div className="bg-sf-bg-elevated p-6 rounded-2xl border border-sf-border shadow-xs space-y-4">
+					{/* <div className="bg-sf-bg-elevated p-6 rounded-2xl border border-sf-border shadow-xs space-y-4">
 						<h2 className="font-serif text-lg font-semibold text-sf-fg pb-3 border-b border-sf-border flex items-center gap-2">
 							<RefreshCcw className="h-4 w-4 text-[#C49B83]" />
 							Preservation & Care Log
@@ -358,7 +355,7 @@ export function MyAccount() {
 								collapses.
 							</p>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>

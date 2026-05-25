@@ -9,6 +9,7 @@ import {
 	Truck,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
 import { boutiqueRoutes } from "@/lib/boutique/routes";
@@ -85,7 +86,7 @@ export function CheckoutForm() {
 
 	if (isPlaced && placedOrderDetails) {
 		return (
-			<div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8 text-center bg-[#FCFAF7] dark:bg-auto transition-colors duration-300">
+			<div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8 text-center bg-sf-bg transition-colors duration-300">
 				<motion.div
 					initial={{ opacity: 0, scale: 0.95 }}
 					animate={{ opacity: 1, scale: 1 }}
@@ -97,56 +98,57 @@ export function CheckoutForm() {
 
 					<div className="space-y-2">
 						<span className="text-sm text-[#C49B83] uppercase tracking-widest font-bold block">
-							Transaction Authorized
+							Xác Nhận Đơn Hàng
 						</span>
 						<h1 className="font-serif text-3xl font-light text-sf-fg">
 							Bông Hoa Của Bạn Đang Được Gửi Đi!
 						</h1>
 						<p className="text-xs text-[#666666] dark:text-[#A0A0A0] max-w-md mx-auto leading-relaxed">
-							Order{" "}
-							<strong className="text-[#1A1A1A] dark:text-white">
-								{placedOrderDetails.id}
+							Đơn{" "}
+							<strong className="text-sf-fg">{placedOrderDetails.id}</strong>{" "}
+							của bạn đã được tiếp nhận và đang trong quá trình xử lý. Chúng tôi
+							sẽ liên hệ với bạn qua số điện thoại{" "}
+							<strong className="text-sf-fg">
+								{placedOrderDetails.recipientPhone}
 							</strong>{" "}
-							has been secured successfully. Our design florists are currently
-							preparing the flower care water formula for cutting.
 						</p>
 					</div>
 
 					{/* Detailed Invoice Receipt Card */}
-					<div className="rounded-xl border text-sf-fg bg-[#FCFAF7] dark:bg-[#0A0A0A] p-5 text-left text-xs space-y-4">
+					<div className="rounded-xl border text-sf-fg bg-sf-bg-elevated p-5 text-left text-xs space-y-4">
 						<h3 className="font-serif text-sm font-semibold text-sf-fg pb-2 border-b border-[#EBE5DA]/50 dark:border-[#2C2C2C]/50">
-							Receipt / Hóa Đơn Chi Tiết
+							Hóa Đơn Chi Tiết
 						</h3>
 
 						<div className="grid grid-cols-2 gap-y-2.5 text-[#666666] dark:text-[#A0A0A0]">
-							<div>Invoice Date:</div>
-							<div className="text-right text-[#1A1A1A] dark:text-white font-medium">
+							<div>Khởi tạo ngày:</div>
+							<div className="text-right text-sf-fg font-medium">
 								{placedOrderDetails.date}
 							</div>
 
-							<div>Recipient:</div>
-							<div className="text-right text-[#1A1A1A] dark:text-white font-medium">
+							<div>Người Nhận:</div>
+							<div className="text-right text-sf-fg font-medium">
 								{placedOrderDetails.recipientName}
 							</div>
 
-							<div>Phone Number:</div>
-							<div className="text-right text-[#1A1A1A] dark:text-white font-medium">
+							<div>Số Điện Thoại:</div>
+							<div className="text-right text-sf-fg font-medium">
 								{placedOrderDetails.recipientPhone}
 							</div>
 
-							<div>Atelier Destination:</div>
-							<div className="text-right text-[#1A1A1A] dark:text-white font-medium line-clamp-1">
+							<div>Địa Chỉ:</div>
+							<div className="text-right text-sf-fg font-medium line-clamp-1">
 								{placedOrderDetails.address}, {placedOrderDetails.district},{" "}
 								{placedOrderDetails.city}
 							</div>
 
-							<div>Method:</div>
-							<div className="text-right text-[#1A1A1A] dark:text-white font-medium uppercase">
+							<div>Phương Thức Thanh Toán:</div>
+							<div className="text-right text-sf-fg font-medium uppercase">
 								{placedOrderDetails.paymentMethod}
 							</div>
 
 							<div className="border-t border-dashed text-sf-fg pt-2.5 font-bold">
-								Total Deducted:
+								Tổng Số Tiền:
 							</div>
 							<div className="border-t border-dashed text-sf-fg pt-2.5 text-right font-bold text-lg">
 								${placedOrderDetails.totalAmount}
@@ -157,19 +159,17 @@ export function CheckoutForm() {
 					{paymentMethod === "Bank Transfer" && (
 						<div className="bg-amber-50 dark:bg-amber-950/30 rounded-xl p-4 border border-amber-200/50 text-left space-y-2">
 							<span className="text-xs uppercase tracking-widest font-bold text-amber-700 dark:text-amber-300 block">
-								Bank Settlement Pending
+								Hướng Dẫn Thanh Toán Chuyển Khoản
 							</span>
 							<p className="text-[11px] text-amber-600 dark:text-amber-400 font-light leading-relaxed">
-								Please transfer exactly{" "}
+								Vui lòng chuyển khoản đúng số tiền{" "}
 								<strong className="text-base font-bold">
 									${placedOrderDetails.totalAmount}
 								</strong>{" "}
-								to Techcombank:{" "}
-								<strong className="font-semibold text-[#1A1A1A] dark:text-white">
-									19034567891011
-								</strong>{" "}
+								Tới VPBank:{" "}
+								<strong className="font-semibold text-sf-fg">50041808</strong>{" "}
 								(SOULFLOW LTD) with memo content{" "}
-								<strong className="font-semibold text-[#1A1A1A] dark:text-white">
+								<strong className="font-semibold text-sf-fg">
 									{placedOrderDetails.id}
 								</strong>
 								.
@@ -181,9 +181,9 @@ export function CheckoutForm() {
 						<Link
 							id="checkout-receipt-back-btn"
 							href={boutiqueRoutes.home}
-							className="inline-block px-6 py-3 rounded-full bg-[#1A1A1A] dark:bg-white text-white dark:text-[#1A1A1A] text-xs font-bold uppercase tracking-widest hover:bg-[#C49B83] dark:hover:bg-[#C49B83] hover:text-white dark:hover:text-white transition-colors duration-200"
+							className="inline-block px-6 py-3 rounded-full bg-amber-600 text-white dark:text-[#1A1A1A] text-xs font-bold uppercase tracking-widest hover:bg-[#C49B83] dark:hover:bg-[#C49B83] hover:text-white dark:hover:text-white transition-colors duration-200"
 						>
-							Continue At Boutique
+							Tiếp Tục Khám Phá Cửa Hàng
 						</Link>
 					</div>
 				</motion.div>
@@ -195,10 +195,10 @@ export function CheckoutForm() {
 		<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-sf-bg-elevated transition-colors duration-300">
 			<div className="text-center space-y-2 mb-10">
 				<span className="text-sm font-bold tracking-widest text-[#C49B83] uppercase block">
-					Atelier Shipping Logistics
+					Thanh Toán An Toàn
 				</span>
 				<h1 className="font-serif text-3xl sm:text-4xl font-light text-sf-fg">
-					Secure Checkout
+					Kiểm Tra Và Xác Nhận Đơn Hàng Của Bạn
 				</h1>
 			</div>
 
@@ -206,11 +206,11 @@ export function CheckoutForm() {
 				<div className="text-center py-20 bg-sf-bg-elevated rounded-2xl border text-sf-fg max-w-md mx-auto">
 					<ShoppingBag className="mx-auto h-10 w-10 text-[#C49B83] opacity-65 mb-4" />
 					<h3 className="font-serif text-lg text-sf-fg">
-						Your active bag is empty
+						Giỏ hàng của bạn đang trống!
 					</h3>
 					<p className="text-xs text-[#666666] dark:text-[#A0A0A0] mt-1 max-w-xs mx-auto leading-relaxed font-light">
-						Please add some floral species catalog arrangements into your
-						shopping basket to initialize logistics checkout sequences.
+						Vui lòng thêm một số sản phẩm vào giỏ hàng của bạn để bắt đầu quy
+						trình thanh toán.
 					</p>
 				</div>
 			) : (
@@ -224,7 +224,7 @@ export function CheckoutForm() {
 						<div className="bg-sf-bg-elevated p-6 rounded-2xl border border-[#EBE5DA] dark:border-[#222222] shadow-xs space-y-4">
 							<h2 className="font-serif text-lg font-semibold text-sf-fg flex items-center gap-2 border-b border-[#EBE5DA] dark:border-[#222222] pb-3">
 								<Truck className="h-4.5 w-4.5 text-[#C49B83]" />
-								1. Recipient Delivery Details
+								1. Thông Tin Người Nhận
 							</h2>
 
 							<div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -233,7 +233,7 @@ export function CheckoutForm() {
 										htmlFor="recipient-name-input"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										Recipient Name
+										Tên Người Nhận
 									</label>
 									<input
 										id="recipient-name-input"
@@ -241,7 +241,7 @@ export function CheckoutForm() {
 										required
 										value={recipientName}
 										onChange={(e) => setRecipientName(e.target.value)}
-										className="w-full text-xs rounded-lg border bg-[#FCFAF7] dark:bg-[#1C1C1C] text-[#1F1A16] dark:text-[#EAE8E4] p-3 outline-none focus:border-[#C49B83]"
+										className="w-full text-xs rounded-lg border bg-sf-bg-elevated text-sf-fg p-3 outline-none focus:border-[#C49B83]"
 									/>
 								</div>
 
@@ -250,7 +250,7 @@ export function CheckoutForm() {
 										htmlFor="recipient-phone-input"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										Recipient Phone Number
+										Số Điện Thoại Người Nhận
 									</label>
 									<input
 										id="recipient-phone-input"
@@ -258,7 +258,7 @@ export function CheckoutForm() {
 										required
 										value={recipientPhone}
 										onChange={(e) => setRecipientPhone(e.target.value)}
-										className="w-full text-xs rounded-lg border text-sf-fg bg-[#FCFAF7] dark:bg-[#1C1C1C] dark:text-[#EAE8E4] p-3 outline-none focus:border-[#C49B83]"
+										className="w-full text-xs rounded-lg border text-sf-fg bg-sf-bg-elevated p-3 outline-none focus:border-[#C49B83]"
 									/>
 								</div>
 							</div>
@@ -270,7 +270,7 @@ export function CheckoutForm() {
 										htmlFor="city-select"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										Province / City
+										Tỉnh / Thành phố
 									</label>
 									<select
 										id="city-select"
@@ -284,7 +284,7 @@ export function CheckoutForm() {
 												setSelectedDistrict(city.districts[0]);
 											}
 										}}
-										className="w-full text-xs rounded-lg border text-sf-fg bg-[#FCFAF7] dark:bg-[#1C1C1C] dark:text-[#EAE8E4] p-3 outline-none focus:border-[#C49B83] cursor-pointer animate-none"
+										className="w-full text-xs rounded-lg border text-sf-fg bg-sf-bg-elevated p-3 outline-none focus:border-[#C49B83] cursor-pointer animate-none"
 									>
 										{locationData.map((city) => (
 											<option key={city.code} value={city.code}>
@@ -299,13 +299,13 @@ export function CheckoutForm() {
 										htmlFor="district-select"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										District / Quận Huyện
+										Quận/Huyện
 									</label>
 									<select
 										id="district-select"
 										value={selectedDistrict}
 										onChange={(e) => setSelectedDistrict(e.target.value)}
-										className="w-full text-xs rounded-lg border text-sf-fg bg-[#FCFAF7] dark:bg-[#1C1C1C] dark:text-[#EAE8E4] p-3 outline-none focus:border-[#C49B83] cursor-pointer"
+										className="w-full text-xs rounded-lg border text-sf-fg bg-sf-bg-elevated p-3 outline-none focus:border-[#C49B83] cursor-pointer"
 									>
 										{districtsOfCity.map((dist) => (
 											<option key={dist} value={dist}>
@@ -320,7 +320,7 @@ export function CheckoutForm() {
 										htmlFor="ward-input"
 										className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 									>
-										Ward / Phường Xã
+										Phường/Xã
 									</label>
 									<input
 										id="ward-input"
@@ -329,7 +329,7 @@ export function CheckoutForm() {
 										value={ward}
 										onChange={(e) => setWard(e.target.value)}
 										placeholder="Thảo Điền Ward"
-										className="w-full text-xs rounded-lg border bg-[#FCFAF7] dark:bg-[#1C1C1C] text-[#1F1A16] dark:text-[#EAE8E4] p-3 outline-none focus:border-[#C49B83]"
+										className="w-full text-xs rounded-lg border bg-sf-bg-elevated text-sf-fg p-3 outline-none focus:border-[#C49B83]"
 									/>
 								</div>
 							</div>
@@ -339,7 +339,7 @@ export function CheckoutForm() {
 									htmlFor="address-street"
 									className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
 								>
-									Street Address & Apartment
+									Địa Chỉ Đường phố & Căn Hộ
 								</label>
 								<input
 									id="address-street"
@@ -347,7 +347,7 @@ export function CheckoutForm() {
 									required
 									value={address}
 									onChange={(e) => setAddress(e.target.value)}
-									className="w-full text-xs rounded-lg border text-sf-fg bg-[#FCFAF7] dark:bg-[#1C1C1C] dark:text-[#EAE8E4] p-3 outline-none focus:border-[#C49B83]"
+									className="w-full text-xs rounded-lg border text-sf-fg bg-sf-bg-elevated p-3 outline-none focus:border-[#C49B83]"
 								/>
 							</div>
 						</div>
@@ -356,7 +356,7 @@ export function CheckoutForm() {
 						<div className="bg-sf-bg-elevated p-6 rounded-2xl border border-[#EBE5DA] dark:border-[#222222] shadow-xs space-y-4">
 							<h2 className="font-serif text-lg font-semibold text-sf-fg flex items-center gap-2 border-b border-[#EBE5DA] dark:border-[#222222] pb-3">
 								<CreditCard className="h-4.5 w-4.5 text-[#C49B83]" />
-								2. Select Settlement Gateway
+								2. Chọn Phương Thức Thanh Toán
 							</h2>
 
 							<div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
@@ -364,17 +364,17 @@ export function CheckoutForm() {
 									{
 										id: "VNPAY" as const,
 										label: "VNPAY QR-PAY",
-										desc: "Scan and pay instantly with Vietnamese banking apps.",
+										desc: "Quét mã VNPay an toàn, không cần nhập liệu thủ công. Hoàn hảo cho người dùng địa phương.",
 									},
 									{
 										id: "MoMo" as const,
 										label: "MOMO E-WALLET",
-										desc: "Secure payment through MoMo mobile app platform.",
+										desc: "Thanh toán an toàn thông qua nền tảng ứng dụng di động MoMo.",
 									},
 									{
 										id: "Bank Transfer" as const,
 										label: "BANK TRANSFER",
-										desc: "Direct fast bank remittance with order memo.",
+										desc: "Chuyển khoản ngân hàng nhanh chóng với ghi chú đơn hàng.",
 									},
 								].map((pay) => {
 									const isChose = paymentMethod === pay.id;
@@ -415,7 +415,7 @@ export function CheckoutForm() {
 										className="p-4 bg-red-50/50 dark:bg-red-950/25 border border-red-200/50 rounded-xl space-y-3"
 									>
 										<span className="text-xs font-bold tracking-widest text-[#D9381E] uppercase block">
-											Instructions
+											Hướng Dẫn Thanh Toán VNPAY QR-PAY
 										</span>
 										<p className="text-xs text-[#D9381E] font-light leading-relaxed">
 											A secured dynamic VNPay QR code will be generated on
@@ -453,33 +453,33 @@ export function CheckoutForm() {
 										initial={{ opacity: 0, height: 0 }}
 										animate={{ opacity: 1, height: "auto" }}
 										exit={{ opacity: 0, height: 0 }}
-										className="p-4 bg-[#EAE6DD]/50 dark:bg-[#1E1E1E] rounded-xl space-y-3"
+										className="p-4 bg-sf-surface rounded-xl space-y-3"
 									>
 										<span className="text-xs font-bold tracking-widest text-[#C49B83] uppercase block">
 											Atelier Settlement Credentials
 										</span>
-										<div className="text-xs text-[#666666] dark:text-[#CCCCCC] space-y-2">
+										<div className="text-xs text-sf-fg space-y-2">
 											<p className="font-light leading-relaxed">
 												Manually transfer exactly the total invoice sum to our
 												secure central shop reserves:
 											</p>
 
-											<div className="bg-white dark:bg-[#0A0A0A] p-3 rounded-lg border text-sf-fg space-y-1 relative">
+											<div className="bg-sf-bg-elevated p-3 rounded-lg border text-sf-fg space-y-1 relative">
 												<p>
-													<strong className="font-normal text-[#888888]">
-														Bank:
+													<strong className="font-normal text-sf-fg">
+														Ngân Hàng:
 													</strong>{" "}
-													Techcombank (TCB)
+													VPBank
 												</p>
 												<p>
-													<strong className="font-normal text-[#888888]">
-														Account No:
+													<strong className="font-normal text-sf-fg">
+														Số Tài Khoản:
 													</strong>{" "}
-													19034567891011
+													50041808
 												</p>
 												<p>
-													<strong className="font-normal text-[#888888]">
-														Name:
+													<strong className="font-normal text-sf-fg">
+														Tên Chủ Tài Khoản:
 													</strong>{" "}
 													SOULFLOW FLOWER BOUTIQUE
 												</p>
@@ -495,7 +495,7 @@ export function CheckoutForm() {
 												</button>
 												{clipboardCopied && (
 													<span className="absolute right-12 top-4 text-xs text-green-500 font-bold uppercase">
-														Copied!
+														Đã sao chép!
 													</span>
 												)}
 											</div>
@@ -510,7 +510,7 @@ export function CheckoutForm() {
 					<div className="lg:col-span-5 bg-sf-bg-elevated p-6 rounded-2xl border border-[#EBE5DA] dark:border-[#222222] shadow-xs space-y-5">
 						<h2 className="font-serif text-lg font-semibold text-sf-fg pb-3 border-b border-[#EBE5DA] dark:border-[#222222] flex items-center gap-2">
 							<ShoppingBag className="h-4.5 w-4.5 text-[#C49B83]" />
-							Order Summary
+							3. Đơn Hàng Của Bạn
 						</h2>
 
 						{/* List items */}
@@ -518,10 +518,10 @@ export function CheckoutForm() {
 							{cart.map((item) => (
 								<div
 									key={item.id}
-									className="flex gap-3 justify-between items-start text-xs border-b border-[#EBE5DA]/50 dark:border-[#222222]/50 pb-3"
+									className="flex gap-3 justify-between items-start text-xs border-b border-sf-border pb-3"
 								>
 									<div className="flex gap-2">
-										<img
+										<Image
 											src={item.flower.image}
 											alt={item.flower.name}
 											className="h-10 w-10 rounded-sm object-cover grayscale-1/10 shrink-0"
@@ -532,7 +532,7 @@ export function CheckoutForm() {
 												{item.flower.name}
 											</h4>
 											<p className="text-sm text-[#A0A0A0] mt-0.5">
-												Size: {item.selectedSize} · Qty: {item.quantity}
+												Size: {item.selectedSize} · Số lượng: {item.quantity}
 											</p>
 										</div>
 									</div>
@@ -544,23 +544,23 @@ export function CheckoutForm() {
 						</div>
 
 						{/* Invoice summaries */}
-						<div className="space-y-2 text-xs border-t border-[#EBE5DA] dark:border-[#222222] pt-4">
+						<div className="space-y-2 text-xs border-t border-sf-border pt-4">
 							<div className="flex justify-between text-[#666666] dark:text-[#A0A0A0]">
-								<span>Artisanal Subtotal</span>
+								<span>Thành Tiền</span>
 								<span>${subtotal}</span>
 							</div>
 							{discount > 0 && (
 								<div className="flex justify-between text-green-500 font-semibold uppercase">
-									<span>Arrangement Discount</span>
+									<span>Khuyến mãi</span>
 									<span>-${discount.toFixed(0)}</span>
 								</div>
 							)}
 							<div className="flex justify-between text-[#666666] dark:text-[#A0A0A0]">
-								<span>Atelier Courier Shipping</span>
+								<span>Phí Vận Chuyển</span>
 								<span>${shippingFee}</span>
 							</div>
-							<div className="flex justify-between font-bold text-sm text-sf-fg border-t border-[#EBE5DA] dark:border-[#222222] pt-3">
-								<span>Final Billing Amount</span>
+							<div className="flex justify-between font-bold text-sm text-sf-fg border-t border-sf-border pt-3">
+								<span>Tổng Cộng</span>
 								<span className="text-[#C49B83] text-base font-bold">
 									${total.toFixed(0)}
 								</span>
@@ -574,13 +574,22 @@ export function CheckoutForm() {
 							className="w-full flex items-center justify-center gap-1.5 rounded-xl bg-[#1A1A1A] dark:bg-[#FCFAF7] py-4 text-xs font-bold uppercase tracking-widest text-white dark:text-[#1F1A16] hover:bg-[#C49B83] dark:hover:bg-[#C49B83] hover:text-white dark:hover:text-white transition-all duration-300 shadow-md"
 						>
 							<Check className="h-4 w-4 text-[#C49B83]" />
-							Secure and Place Order
+							Xác Nhận Thanh Toán
 						</button>
+						<p className="text-sm text-center text-[#888888] font-light leading-normal flex items-start justify-center gap-2">
+							<input type="checkbox" required className="mt-1.5 h-3 w-3" />
 
-						<p className="text-sm text-center text-[#888888] font-light leading-normal">
-							By confirming checkout, you authorization immediate booking
-							reservations. Cancellations are valid within 2 hours of payment
-							settlements.
+							<span>
+								Khi đặt hàng, bạn đã đồng ý với{" "}
+								<Link
+									href={boutiqueRoutes.terms}
+									target="_blank"
+									rel="noopener noreferrer"
+									className="text-[#C49B83] hover:underline"
+								>
+									Điều khoản và Điều kiện
+								</Link>
+							</span>
 						</p>
 					</div>
 				</form>

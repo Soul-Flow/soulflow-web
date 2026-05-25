@@ -6,6 +6,9 @@ export const boutiqueRoutes = {
 	checkout: "/checkout",
 	account: "/account",
 	contact: "/contact",
+	about: "/about",
+	privacy: "/privacy",
+	terms: "/terms",
 } as const;
 
 export type BoutiqueRouteKey = keyof typeof boutiqueRoutes;

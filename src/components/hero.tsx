@@ -2,13 +2,12 @@
 
 import { ArrowRight, Filter, Leaf, Plus, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { boutiqueRoutes } from "@/lib/boutique/routes";
 import { useBoutiqueStore } from "@/store/boutique-store";
 
 export function Hero() {
-	const router = useRouter();
 	const { flowers, setSelectedCategory, addToCart } = useBoutiqueStore();
 
 	const budgetTiers = [
@@ -95,13 +94,14 @@ export function Hero() {
 					>
 						<div className="inline-flex items-center gap-2 rounded-full border border-(--sf-accent)/30 bg-sf-accent/10 px-3 py-1 text-sm font-bold tracking-widest uppercase text-sf-accent">
 							<Sparkles className="h-3.5 w-3.5 animate-spin" />
-							BESPOKE BOTANICAL COUTURE
+							NGHỆ THUẬT HOA THIẾT KẾ RIÊNG
 						</div>
 
 						<h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-sf-fg leading-tight">
-							Bespoke Blooms for <br />
+							Hoa dành cho những
+							<br />
 							<span className="font-normal italic text-sf-accent">
-								Every Sacred Moment
+								khoảnh khắc đáng nhớ
 							</span>
 						</h1>
 
@@ -144,27 +144,30 @@ export function Hero() {
 					>
 						{/* Main Image Frame */}
 						<div className="relative mx-auto max-w-95 sm:max-w-md overflow-hidden rounded-2xl border-8 border-sf-bg-elevated shadow-xl">
-							{/* eslint-disable-next-line @next/next/no-img-element */}
-							<img
-								src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&q=80&w=600"
-								alt="SoulFlow luxury floral bouquet curation"
-								className="aspect-4/5 w-full object-cover grayscale-1/10 hover:grayscale-0 transition-all duration-700 hover:scale-105"
-								referrerPolicy="no-referrer"
-							/>
+							<div className="relative aspect-4/5 w-full h-110">
+								<Image
+									src="https://images.unsplash.com/photo-1603919361324-11302f967304?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OTZ8fGhvYSUyMG0lRTElQkElQUJ1JTIwJUM0JTkxJUM2JUExbnxlbnwwfDF8MHx8fDI%3D"
+									alt="SoulFlow luxury floral bouquet curation"
+									className="aspect-4/5 w-full object-cover grayscale-1/10 hover:grayscale-0 transition-all duration-700 hover:scale-105"
+									referrerPolicy="no-referrer"
+									fill
+									sizes="( max-width: 640px ) 100vw, ( max-width: 1280px ) 50vw, 33vw"
+								/>
+							</div>
 							<div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent"></div>
 
-							<div className="absolute bottom-6 left-6 right-6 text-white">
+							<div className="absolute bottom-6 left-20 right-6 text-white">
 								<span className="text-sm uppercase tracking-widest text-sf-accent font-bold">
-									In Bloom This Season
+									Rực Rỡ Mùa Này
 								</span>
 								<h3 className="font-serif text-xl font-normal leading-tight">
-									Sarah Bernhardt Blush Peony
+									Mẫu Đơn Sarah Bernhardt Hồng Phấn
 								</h3>
 							</div>
 						</div>
 
 						{/* Little floating detail card */}
-						<div className="absolute -bottom-6 -left-6 hidden sm:block p-4 rounded-xl border border-sf-border bg-(--sf-bg-elevated)/90 backdrop-blur-md shadow-lg max-w-42.5">
+						<div className="absolute -bottom-6 -left-20 hidden sm:block p-4 rounded-xl border border-sf-border bg-(--sf-bg-elevated)/90 backdrop-blur-md shadow-lg max-w-42.5">
 							<span className="font-serif text-sf-accent italic text-xs block">
 								Ý nghĩa của mẫu đơn
 							</span>
@@ -211,7 +214,7 @@ export function Hero() {
 			<section className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8 space-y-16">
 				<div className="text-center space-y-2">
 					<span className="text-sm font-bold tracking-widest text-sf-accent uppercase block">
-						Atelier Highlight Collections
+						Bộ Sưu Tập Nổi Bật
 					</span>
 					<h2 className="font-serif text-3xl sm:text-4xl font-light text-sf-fg">
 						Bản Thiết Kế Nổi Bật Trang Chủ
@@ -270,12 +273,14 @@ export function Hero() {
 											href={boutiqueRoutes.product(flower.id)}
 											className="relative block aspect-square w-full overflow-hidden rounded-lg bg-sf-surface"
 										>
-											{/* eslint-disable-next-line @next/next/no-img-element */}
-											<img
+											<Image
 												src={flower.image}
 												alt={flower.name}
 												className="h-full w-full object-cover group-hover:scale-104 transition-transform duration-500"
 												referrerPolicy="no-referrer"
+												fill
+												sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+												loading="eager"
 											/>
 
 											{flower.popular && (
@@ -337,7 +342,7 @@ export function Hero() {
 			<section className="mx-auto max-w-7xl px-4 py-8 pb-20 sm:px-6 lg:px-8">
 				<div className="text-center space-y-2 mb-12">
 					<span className="text-sm font-bold tracking-widest text-sf-accent uppercase block">
-						Tailored Elegance
+						Thanh lịch mang dấu ấn riêng
 					</span>
 					<h2 className="font-serif text-3xl font-light text-sf-fg">
 						Lựa Chọn Theo Ngân Sách
@@ -362,12 +367,14 @@ export function Hero() {
 								className="group cursor-pointer overflow-hidden rounded-xl border border-sf-border bg-sf-bg-elevated p-4 shadow-sm hover:shadow-md transition-all duration-300"
 							>
 								<div className="relative aspect-16/10 w-full overflow-hidden rounded-lg bg-sf-surface">
-									{/* eslint-disable-next-line @next/next/no-img-element */}
-									<img
+									<Image
 										src={tier.img}
 										alt={tier.label}
 										className="h-full w-full object-cover grayscale-2/10 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
 										referrerPolicy="no-referrer"
+										fill
+										sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+										loading="eager"
 									/>
 
 									<span className="absolute top-3 right-3 rounded-full bg-black/80 backdrop-blur-md px-3 py-1 text-xs font-bold text-white tracking-widest">

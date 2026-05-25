@@ -85,7 +85,7 @@ export const defaultFlowers: Flower[] = [
 		careGuide:
 			"Prefers mild room temperature water. Keep water neat by discarding any foliage submerged beneath the waterline.",
 		image:
-			"https://images.unsplash.com/photo-1508784932214-e0a5ea6c41b9?auto=format&fit=crop&q=80&w=600",
+			"https://images.unsplash.com/photo-1565280743844-2fa064644e47?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjB8fGFib3V0JTIwdXMlMjBmbG93ZXJ8ZW58MHwxfDB8fHwy",
 		popular: true,
 	},
 	{
@@ -119,7 +119,7 @@ export const defaultFlowers: Flower[] = [
 		careGuide:
 			"Recut stems under lukewarm water and place in an opaque vase with ample water support.",
 		image:
-			"https://images.unsplash.com/photo-1548894177-3e14fa5a22cf?auto=format&fit=crop&q=80&w=600",
+			"https://images.unsplash.com/photo-1560975684-9a7b778c2dd6?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjV8fGFib3V0JTIwdXMlMjBmbG93ZXJ8ZW58MHwxfDB8fHwy",
 		popular: true,
 	},
 	{
@@ -171,7 +171,7 @@ export const defaultFlowers: Flower[] = [
 		careGuide:
 			"Add clean ice cubes daily to maintain low temperature water for longer bloom integrity.",
 		image:
-			"https://images.unsplash.com/photo-1533604116262-d27806f477bf?auto=format&fit=crop&q=80&w=600",
+			"https://images.unsplash.com/photo-1626159176951-17da083771d7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NjJ8fGFib3V0JTIwdXMlMjBmbG93ZXJ8ZW58MHwxfDB8fHwy",
 		popular: true,
 	},
 	{
@@ -274,7 +274,7 @@ export const defaultFlowers: Flower[] = [
 		careGuide:
 			"Keep completely dry. Dust off lightly using a low velocity cool hair dryer.",
 		image:
-			"https://images.unsplash.com/photo-1490750961168-d8f1e54f60a3?auto=format&fit=crop&q=80&w=600",
+			"https://images.unsplash.com/photo-1735779411191-4a2f31a67686?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NTZ8fGFib3V0JTIwdXMlMjBmbG93ZXJ8ZW58MHwxfDB8fHwy",
 		popular: false,
 	},
 ];

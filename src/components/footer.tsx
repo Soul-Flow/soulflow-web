@@ -6,23 +6,23 @@ import { boutiqueRoutes } from "@/lib/boutique/routes";
 
 export function Footer() {
 	return (
-		<footer className="bg-sf-bg border-t border-sf-border transition-colors duration-300">
+		<footer className="bg-sf-bg border-t-4 border-sf-border transition-colors duration-300">
 			<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 				<div className="grid grid-cols-1 gap-8 md:grid-cols-4">
 					<div className="space-y-3">
-						<span className="font-sans font-bold text-sm tracking-[0.25em] text-sf-fg">
+						<span className="font-sans font-bold text-2xl tracking-[0.25em] text-sf-fg">
 							SOULFLOW
 						</span>
 						<p className="text-xs text-sf-fg-muted font-light leading-relaxed">
-							An elegant botanical sanctuary and luxury flower preservation
-							atelier. We design using the secret language of 19th-century
-							Victorian floristry.
+							Một không gian hoa tinh tế và nghệ thuật lưu giữ vẻ đẹp thiên
+							nhiên. Chúng tôi tạo nên những thiết kế mang cảm hứng cảm xúc, sự
+							thanh lịch và nét đẹp riêng trong từng loài hoa.
 						</p>
 					</div>
 
 					<div className="space-y-3">
 						<h4 className="text-sm font-bold tracking-widest uppercase text-sf-accent">
-							Atelier Links
+							Đường Dẫn Nhanh
 						</h4>
 						<ul className="space-y-1 text-xs font-light text-sf-fg-muted">
 							<li>
@@ -31,7 +31,7 @@ export function Footer() {
 									href={boutiqueRoutes.home}
 									className="hover:text-sf-accent transition-colors"
 								>
-									Home Atelier
+									Trang Chủ
 								</Link>
 							</li>
 							<li>
@@ -40,7 +40,7 @@ export function Footer() {
 									href={boutiqueRoutes.catalog}
 									className="hover:text-sf-accent transition-colors"
 								>
-									Botanical Catalog
+									Danh Mục Sản Phẩm
 								</Link>
 							</li>
 							<li>
@@ -49,7 +49,7 @@ export function Footer() {
 									href={boutiqueRoutes.bespoke}
 									className="hover:text-sf-accent transition-colors"
 								>
-									Bespoke Floral Design
+									Dịch Vụ Đặt Hoa Theo Yêu Cầu
 								</Link>
 							</li>
 							<li>
@@ -58,7 +58,7 @@ export function Footer() {
 									href={boutiqueRoutes.contact}
 									className="hover:text-sf-accent transition-colors font-medium"
 								>
-									Get in Touch
+									Liên Hệ Chúng Tôi
 								</Link>
 							</li>
 						</ul>
@@ -66,30 +66,31 @@ export function Footer() {
 
 					<div className="space-y-3">
 						<h4 className="text-sm font-bold tracking-widest uppercase text-sf-accent">
-							Accreditation
+							Cam Kết Bền Vững
 						</h4>
 						<div className="space-y-2 text-xs font-light text-sf-fg-muted leading-relaxed">
 							<div className="flex items-center gap-1.5 text-sm uppercase font-bold text-sf-fg">
-								<Sparkles className="h-3.5 w-3.5 text-sf-accent" />
-								Eco-Certified Grower
+								<Sparkles className="h-6.5 w-6.5 text-sf-accent" />
+								Người trồng hoa địa phương được tuyển chọn kỹ lưỡng
 							</div>
-							<p className="text-[11px]">
-								Every stem is organically groomed by family boutique fields,
-								minimizing nitrogenous impacts.
+							<p className="text-[14px]">
+								Chúng tôi hợp tác với những người trồng hoa địa phương cam kết
+								thực hành bền vững, đảm bảo rằng mỗi bó hoa không chỉ đẹp mà còn
+								có nguồn gốc đạo đức và thân thiện với môi trường.
 							</p>
 						</div>
 					</div>
 
 					<div className="space-y-3">
 						<h4 className="text-sm font-bold tracking-widest uppercase text-sf-accent">
-							Head Office
+							Địa Chỉ Cửa Hàng
 						</h4>
 						<p className="text-xs text-sf-fg-muted leading-relaxed font-light">
-							88 Đồng Khởi, Bến Nghé Ward, District 1, Ho Chi Minh City, Vietnam
+							88 Đồng Khởi, Phường Bến Nghé, Quận 1, Hồ Chí Minh, Việt Nam
 						</p>
 						<div className="flex items-center gap-1 text-sm text-sf-fg-muted font-semibold uppercase">
 							<ShieldCheck className="h-4 w-4 text-green-500" />
-							Secure SSL Checkout Gateway
+							An Toàn &amp; Bảo Mật
 						</div>
 					</div>
 				</div>
@@ -97,12 +98,18 @@ export function Footer() {
 				<div className="mt-12 border-t border-sf-border pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-sf-fg-muted">
 					<p>© 2026 SoulFlow Flower Boutique Vietnam. All rights reserved.</p>
 					<div className="flex gap-4">
-						<span className="hover:underline cursor-pointer">
-							Privacy Policy
-						</span>
-						<span className="hover:underline cursor-pointer">
-							Terms of Preservations
-						</span>
+						<Link
+							href={boutiqueRoutes.privacy}
+							className="hover:underline cursor-pointer"
+						>
+							Chính Sách Bảo Mật
+						</Link>
+						<Link
+							href={boutiqueRoutes.terms}
+							className="hover:underline cursor-pointer"
+						>
+							Điều Khoản Dịch Vụ
+						</Link>
 					</div>
 				</div>
 			</div>

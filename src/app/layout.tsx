@@ -4,13 +4,11 @@ import { BoutiqueProviders } from "@/providers/boutique-providers";
 import { ThemeProvider } from "@/providers/theme-provider";
 import "./globals.css";
 
-// Dùng font Inter hỗ trợ tiếng Việt mượt mà (ẩn dưới biến geist-sans để không phải sửa CSS cũ)
 const inter = Inter({
 	variable: "--font-geist-sans",
 	subsets: ["latin", "vietnamese"],
 });
 
-// Thêm font Playfair Display cho các thẻ heading (font-serif) nhìn cho luxury
 const playfair = Playfair_Display({
 	variable: "--font-serif",
 	subsets: ["latin", "vietnamese"],

@@ -11,6 +11,7 @@ import {
 	Star,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { boutiqueRoutes } from "@/lib/boutique/routes";
@@ -101,7 +102,7 @@ export function FlowerCatalog() {
 			<div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-sf-border">
 				<div className="space-y-1.5 text-center md:text-left">
 					<span className="text-sm font-bold tracking-widest text-sf-accent uppercase block">
-						Boutique Collections
+						Bộ Sưu Tập
 					</span>
 					<h1 className="font-serif text-3xl sm:text-4xl font-light text-sf-fg">
 						Danh Mục Sản Phẩm
@@ -191,11 +192,12 @@ export function FlowerCatalog() {
 								className="relative aspect-square w-full filter brightness-100 group-hover:brightness-105 overflow-hidden rounded-lg bg-sf-surface"
 								onClick={() => router.push(boutiqueRoutes.product(flower.id))}
 							>
-								<img
+								<Image
 									src={flower.image}
 									alt={flower.name}
 									className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
 									referrerPolicy="no-referrer"
+									fill
 								/>
 
 								{flower.popular && (
