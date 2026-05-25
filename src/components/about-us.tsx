@@ -46,7 +46,7 @@ export function AboutUs() {
 					Nơi Cảm Xúc Nở Hoa, <br className="hidden sm:block" />
 					<span className="italic text-[#C49B83]">Vẻ Đẹp Vượt Thời Gian</span>
 				</h1>
-				<p className="text-sm sm:text-base text-[#666666] dark:text-[#A0A0A0] max-w-2xl font-light leading-relaxed mb-12">
+				<p className="text-xs sm:text-base text-sf-lg max-w-2xl font-light leading-relaxed mb-12">
 					Chào mừng bạn đến với không gian nghệ thuật thực vật của chúng tôi.
 					Nơi mỗi nhành hoa, chiếc lá đều được nâng niu để kể lên câu chuyện
 					riêng biệt của bạn.
@@ -104,7 +104,7 @@ export function AboutUs() {
 						<h2 className="font-serif text-3xl sm:text-4xl font-light text-sf-fg leading-snug">
 							Khởi Nguồn Từ Tình Yêu <br /> Với Cái Đẹp Nguyên Sơ
 						</h2>
-						<div className="space-y-4 text-sm sm:text-base text-[#666666] dark:text-[#A0A0A0] font-light leading-relaxed">
+						<div className="space-y-4 text-sm sm:text-base text-sf-lg font-light leading-relaxed">
 							<p>
 								Dự án bắt đầu từ một niềm đam mê mãnh liệt với thực vật và mong
 								muốn mang thiên nhiên đến gần hơn với nhịp sống hối hả của đô
@@ -166,7 +166,7 @@ export function AboutUs() {
 							<h3 className="font-serif text-lg font-semibold text-sf-fg mb-3">
 								{value.title}
 							</h3>
-							<p className="text-sm text-[#666666] dark:text-[#A0A0A0] font-light leading-relaxed">
+							<p className="text-sm text-sf-fg-muted  leading-relaxed">
 								{value.desc}
 							</p>
 						</div>
@@ -185,7 +185,7 @@ export function AboutUs() {
 						<h2 className="font-serif text-3xl font-light text-white mb-4">
 							Sẵn Sàng Trao Gửi Yêu Thương?
 						</h2>
-						<p className="text-sm text-gray-400 font-light leading-relaxed">
+						<p className="text-xl text-gray-300 font-light leading-relaxed">
 							Khám phá bộ sưu tập hoa tươi nghệ thuật được thiết kế riêng biệt
 							cho mọi dịp quan trọng của bạn.
 						</p>
@@ -194,7 +194,7 @@ export function AboutUs() {
 					<div className="relative z-10 w-full md:w-auto">
 						<Link
 							href={boutiqueRoutes.catalog}
-							className="group flex w-full md:w-auto items-center justify-center gap-2 px-8 py-4 bg-[#C49B83] text-white rounded-xl text-sm font-bold uppercase tracking-widest hover:bg-[#A37B65] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+							className="group flex w-full md:w-auto items-center justify-center gap-2 px-8 py-4 bg-[#C49B83] text-sf-fg rounded-xl text-sm font-bold uppercase tracking-widest hover:bg-[#A37B65] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
 						>
 							Khám Phá Bộ Sưu Tập
 							<ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
