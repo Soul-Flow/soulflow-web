@@ -521,12 +521,16 @@ export function CheckoutForm() {
 									className="flex gap-3 justify-between items-start text-xs border-b border-sf-border pb-3"
 								>
 									<div className="flex gap-2">
-										<Image
-											src={item.flower.image}
-											alt={item.flower.name}
-											className="h-10 w-10 rounded-sm object-cover grayscale-1/10 shrink-0"
-											referrerPolicy="no-referrer"
-										/>
+										<div className="relative h-10 w-10 rounded-sm overflow-hidden bg-sf-bg">
+											<Image
+												src={item.flower.image}
+												alt={item.flower.name}
+												className="h-10 w-10 rounded-sm object-cover grayscale-1/10 shrink-0"
+												referrerPolicy="no-referrer"
+												fill
+												sizes="40px"
+											/>
+										</div>
 										<div>
 											<h4 className="font-serif font-semibold text-[#1A1A1A] dark:text-white line-clamp-1 leading-tight">
 												{item.flower.name}
