@@ -107,13 +107,16 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 									className="flex items-start gap-4 bg-sf-bg-elevated p-3 rounded-xl border border-sf-border shadow-sm"
 								>
 									{/* Photo container */}
-									<Image
-										src={item.flower.image}
-										alt={item.flower.name}
-										fill
-										className="h-16 w-16 rounded-lg object-cover grayscale-1/10 shrink-0"
-										referrerPolicy="no-referrer"
-									/>
+									<div className="relative h-16 w-16">
+										<Image
+											src={item.flower.image}
+											alt={item.flower.name}
+											fill
+											className="h-16 w-16 rounded-lg object-cover grayscale-1/10 shrink-0"
+											referrerPolicy="no-referrer"
+											sizes="64px"
+										/>
+									</div>
 
 									{/* Text descriptions */}
 									<div className="flex-1 space-y-1">
