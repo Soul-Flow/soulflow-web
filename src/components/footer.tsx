@@ -13,7 +13,7 @@ export function Footer() {
 						<span className="font-sans font-bold text-2xl tracking-[0.25em] text-sf-fg">
 							SOULFLOW
 						</span>
-						<p className="text-xs text-sf-fg-muted font-light leading-relaxed">
+						<p className="text-sm text-sf-fg-muted font-light leading-relaxed">
 							Một không gian hoa tinh tế và nghệ thuật lưu giữ vẻ đẹp thiên
 							nhiên. Chúng tôi tạo nên những thiết kế mang cảm hứng cảm xúc, sự
 							thanh lịch và nét đẹp riêng trong từng loài hoa.
@@ -29,7 +29,7 @@ export function Footer() {
 								<Link
 									id="footer-btn-home"
 									href={boutiqueRoutes.home}
-									className="hover:text-sf-accent transition-colors"
+									className="hover:text-sf-accent text-sm transition-colors"
 								>
 									Trang Chủ
 								</Link>
@@ -38,7 +38,7 @@ export function Footer() {
 								<Link
 									id="footer-btn-catalog"
 									href={boutiqueRoutes.catalog}
-									className="hover:text-sf-accent transition-colors"
+									className="hover:text-sf-accent text-sm transition-colors"
 								>
 									Danh Mục Sản Phẩm
 								</Link>
@@ -47,7 +47,7 @@ export function Footer() {
 								<Link
 									id="footer-btn-bespoke"
 									href={boutiqueRoutes.bespoke}
-									className="hover:text-sf-accent transition-colors"
+									className="hover:text-sf-accent text-sm transition-colors"
 								>
 									Dịch Vụ Đặt Hoa Theo Yêu Cầu
 								</Link>
@@ -56,7 +56,7 @@ export function Footer() {
 								<Link
 									id="footer-btn-contact"
 									href={boutiqueRoutes.contact}
-									className="hover:text-sf-accent transition-colors font-medium"
+									className="hover:text-sf-accent text-sm transition-colors font-medium"
 								>
 									Liên Hệ Chúng Tôi
 								</Link>
@@ -68,12 +68,12 @@ export function Footer() {
 						<h4 className="text-sm font-bold tracking-widest uppercase text-sf-accent">
 							Cam Kết Bền Vững
 						</h4>
-						<div className="space-y-2 text-xs font-light text-sf-fg-muted leading-relaxed">
+						<div className="space-y-2 text-sm font-light text-sf-fg-muted leading-relaxed">
 							<div className="flex items-center gap-1.5 text-sm uppercase font-bold text-sf-fg">
 								<Sparkles className="h-6.5 w-6.5 text-sf-accent" />
 								Người trồng hoa địa phương được tuyển chọn kỹ lưỡng
 							</div>
-							<p className="text-[14px]">
+							<p className="text-[17px] leading-relaxed">
 								Chúng tôi hợp tác với những người trồng hoa địa phương cam kết
 								thực hành bền vững, đảm bảo rằng mỗi bó hoa không chỉ đẹp mà còn
 								có nguồn gốc đạo đức và thân thiện với môi trường.
@@ -85,11 +85,11 @@ export function Footer() {
 						<h4 className="text-sm font-bold tracking-widest uppercase text-sf-accent">
 							Địa Chỉ Cửa Hàng
 						</h4>
-						<p className="text-xs text-sf-fg-muted leading-relaxed font-light">
+						<p className="text-sm text-sf-fg-muted leading-relaxed">
 							88 Đồng Khởi, Phường Bến Nghé, Quận 1, Hồ Chí Minh, Việt Nam
 						</p>
-						<div className="flex items-center gap-1 text-sm text-sf-fg-muted font-semibold uppercase">
-							<ShieldCheck className="h-4 w-4 text-green-500" />
+						<div className="flex items-center gap-1 text-xl pt-4.5 text-sf-fg-muted font-semibold uppercase">
+							<ShieldCheck className="h-8 w-8 text-green-500" />
 							An Toàn &amp; Bảo Mật
 						</div>
 					</div>

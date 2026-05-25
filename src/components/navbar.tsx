@@ -117,7 +117,9 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 							id="nav-link-home"
 							href={boutiqueRoutes.home}
 							className={`relative px-3 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
-								isHome ? "text-sf-accent" : "text-sf-fg-muted hover:text-sf-fg"
+								isHome
+									? "text-sf-accent"
+									: "text-[#4A4A4A]fg-muted hover:text-sf-accent"
 							}`}
 						>
 							Trang Chủ
@@ -152,11 +154,11 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 								className={`relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
 									isCatalog
 										? "text-sf-accent"
-										: "text-sf-fg-muted hover:text-sf-fg"
+										: "text-[#4A4A4A]fg-muted hover:text-sf-accent"
 								}`}
 							>
 								Sản Phẩm
-								<ChevronDown className="h-3 w-3 text-sf-accent" />
+								<ChevronDown className="h-3 w-3 text-[#4A4A4A]fg-muted hover:text-sf-accent" />
 								{isCatalog && (
 									<motion.span
 										layoutId="navUnderline"
@@ -211,7 +213,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 							className={`relative flex items-center gap-1 px-3 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
 								isBespoke
 									? "text-sf-accent"
-									: "text-sf-fg-muted hover:text-sf-fg"
+									: "text-[#4A4A4A]fg-muted hover:text-sf-accent"
 							}`}
 						>
 							<Sparkles className="h-3 w-3 animate-pulse text-sf-accent" />
@@ -232,7 +234,7 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 							className={`relative px-3 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
 								isContact
 									? "text-sf-accent"
-									: "text-sf-fg-muted hover:text-sf-fg"
+									: "text-[#4A4A4A]fg-muted hover:text-sf-accent"
 							}`}
 						>
 							Liên Hệ
@@ -249,7 +251,9 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 							id="nav-link-about"
 							href={boutiqueRoutes.about}
 							className={`relative px-3 py-2 rounded-lg text-xs font-semibold tracking-wider uppercase transition-all duration-300 cursor-pointer ${
-								isAbout ? "text-sf-accent" : "text-sf-fg-muted hover:text-sf-fg"
+								isAbout
+									? "text-sf-accent"
+									: "text-[#4A4A4A]fg-muted hover:text-sf-accent"
 							}`}
 						>
 							Về Chúng Tôi
@@ -265,20 +269,20 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 
 					{/* Luxury Integrated Search Bar */}
 					<div className="relative grow max-w-xs md:max-w-md hidden sm:block">
-						<Search className="absolute left-3.5 top-2.5 h-3.5 w-3.5 text-sf-accent" />
+						<Search className="absolute left-3.5 top-2.5 h-4.5 w-4.5 text-sf-accent" />
 						<input
 							id="header-search-input"
 							type="text"
 							placeholder="Tìm hoa, ý nghĩa, loài mẫu đơn..."
 							value={searchQuery}
 							onChange={(e) => goToCatalogWithSearch(e.target.value)}
-							className="w-full rounded-full border border-sf-border bg-sf-bg-elevated/70 pl-9 pr-8 py-2 text-[11px] text-sf-fg focus:border-sf-accent focus:bg-sf-bg-elevated focus:ring-1 focus:ring-sf-accent outline-none transition-all placeholder:text-sf-fg-muted shadow-inner"
+							className="w-full rounded-full border border-sf-border bg-sf-bg-elevated/70 pl-9 pr-8 py-2 text-[15px] text-sf-fg focus:border-sf-accent focus:bg-sf-bg-elevated focus:ring-1 focus:ring-sf-accent outline-none transition-all placeholder:text-sf-fg-muted shadow-inner"
 						/>
 						{searchQuery && (
 							<button
 								type="button"
 								onClick={() => setSearchQuery("")}
-								className="absolute right-3 top-2.5 h-3.5 w-3.5 flex items-center justify-center text-sf-fg-muted hover:text-sf-fg text-xs font-bold"
+								className="absolute right-3 top-1.5 h-4.5 w-4.5 flex items-center justify-center text-sf-fg-muted hover:text-sf-fg text-xs font-bold"
 								title="Clear Search"
 							>
 								×

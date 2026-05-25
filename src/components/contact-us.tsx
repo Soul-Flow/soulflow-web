@@ -192,7 +192,7 @@ export function ContactUs() {
 				<h1 className="font-serif text-3xl sm:text-4xl font-light text-sf-fg">
 					Liên hệ với chúng tôi
 				</h1>
-				<p className="max-w-md mx-auto text-base text-[#666666] dark:text-[#A0A0A0] font-light">
+				<p className="max-w-md mx-auto text-base text-sf-fg-muted">
 					Để lại yêu cầu thiết kế, đặt câu hỏi về dịch vụ, hoặc chia sẻ phản hồi
 					của bạn với chúng tôi. Chúng tôi rất mong được nghe từ bạn và sẽ phản
 					hồi trong thời gian sớm nhất có thể!
@@ -212,7 +212,7 @@ export function ContactUs() {
 							<div className="space-y-1">
 								<label
 									htmlFor="contact-name"
-									className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
+									className="text-sm uppercase tracking-wider font-bold text-sf-lg"
 								>
 									Tên của bạn
 								</label>
@@ -230,7 +230,7 @@ export function ContactUs() {
 							<div className="space-y-1">
 								<label
 									htmlFor="contact-email"
-									className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
+									className="text-sm uppercase tracking-wider font-bold text-sf-lg"
 								>
 									Địa chỉ Email
 								</label>
@@ -249,7 +249,7 @@ export function ContactUs() {
 						<div className="space-y-1">
 							<label
 								htmlFor="contact-phone"
-								className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
+								className="text-sm uppercase tracking-wider font-bold text-sf-lg"
 							>
 								Số Điện Thoại
 							</label>
@@ -266,7 +266,7 @@ export function ContactUs() {
 						<div className="space-y-1">
 							<label
 								htmlFor="contact-message"
-								className="text-sm uppercase tracking-wider font-bold text-[#666666] dark:text-[#A0A0A0]"
+								className="text-sm uppercase tracking-wider font-bold text-sf-lg"
 							>
 								Chúng tôi có thể giúp gì cho bạn?
 							</label>
@@ -286,7 +286,7 @@ export function ContactUs() {
 								id="contact-submit-btn"
 								type="submit"
 								disabled={sending}
-								className="rounded-lg bg-[#1A1A1A] dark:bg-white text-sf-fg dark:text-[#1F1A16] hover:bg-[#C49B83] dark:hover:bg-[#C49B83] disabled:opacity-50 text-xs font-bold uppercase tracking-widest px-6 py-3 transition-colors shadow-sm"
+								className="rounded-lg bg-amber-500 text-sf-lg hover:bg-[#C49B83] dark:hover:bg-[#C49B83] disabled:opacity-50 text-xs font-bold uppercase tracking-widest px-6 py-3 transition-colors shadow-sm"
 							>
 								{sending ? "Đang gửi yêu cầu..." : "Gửi Yêu Cầu"}
 							</button>
@@ -304,7 +304,7 @@ export function ContactUs() {
 				{/* Right Column - Studio Info coordinates */}
 				<div className="lg:col-span-5 space-y-6">
 					<div className="bg-sf-bg-elevated p-6 rounded-2xl border border-[#C49B83]/30 text-sf-fg space-y-6 shadow-md">
-						<h3 className="font-serif text-lg font-light text-sf-fg">
+						<h3 className="font-serif text-lg font-bold text-sf-fg">
 							Thông Tin Liên Hệ & Địa Chỉ
 						</h3>
 
@@ -312,10 +312,10 @@ export function ContactUs() {
 							<div className="flex items-start gap-3">
 								<MapPin className="h-4.5 w-4.5 text-[#C49B83] shrink-0 mt-0.5" />
 								<div>
-									<p className="font-semibold text-sf-fg uppercase tracking-wider">
+									<p className="font-bold text-sf-fg uppercase tracking-wider">
 										Cửa Hàng SoulFlow
 									</p>
-									<p className="text-sf-fg leading-relaxed mt-0.5">
+									<p className="text-sf-fg text-[17px] leading-relaxed mt-0.5">
 										88 Đồng Khởi, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí
 										Minh, Việt Nam
 									</p>
@@ -325,33 +325,37 @@ export function ContactUs() {
 							<div className="flex items-start gap-3">
 								<Phone className="h-4.5 w-4.5 text-[#C49B83] shrink-0 mt-0.5" />
 								<div>
-									<p className="font-semibold text-sf-fg uppercase tracking-wider">
+									<p className="font-bold text-sf-fg uppercase tracking-wider">
 										Đường Dây Hỗ Trợ Khách Hàng
 									</p>
-									<p className="text-sf-fg mt-0.5">+84 28 3824 5678</p>
+									<p className="text-sf-fg text-[17px] mt-1">
+										+84 28 3824 5678
+									</p>
 								</div>
 							</div>
 
 							<div className="flex items-start gap-3">
 								<Mail className="h-4.5 w-4.5 text-[#C49B83] shrink-0 mt-0.5" />
 								<div>
-									<p className="font-semibold text-sf-fg uppercase tracking-wider">
+									<p className="font-bold text-sf-fg uppercase tracking-wider">
 										Email Hỗ Trợ & Đặt Hàng
 									</p>
-									<p className="text-sf-fg mt-0.5">contact@soulflow.com</p>
+									<p className="text-sf-fg text-[17px] mt-1">
+										contact@soulflow.com
+									</p>
 								</div>
 							</div>
 
 							<div className="flex items-start gap-3">
 								<Clock className="h-4.5 w-4.5 text-[#C49B83] shrink-0 mt-0.5" />
 								<div>
-									<p className="font-semibold text-sf-fg uppercase tracking-wider">
+									<p className="font-bold text-sm text-sf-fg uppercase tracking-wider">
 										Giờ Mở Cửa
 									</p>
-									<p className="text-sf-fg leading-relaxed mt-0.5">
+									<p className="text-sf-fg text-[16px] leading-relaxed mt-0.5">
 										T2 – T7: 08:00 AM – 08:30 PM
 									</p>
-									<p className="text-[#888888]">
+									<p className="text-sf-fg-muted font-bold leading-relaxed mt-0.5">
 										Chủ Nhật: 10:00 AM – 06:00 PM (Đặt hẹn trước để được phục vụ
 										tốt nhất)
 									</p>
@@ -382,7 +386,7 @@ export function ContactUs() {
 				<div className="grid grid-cols-1 gap-12 lg:grid-cols-12 items-start">
 					{/* Post Feedback form */}
 					<div className="lg:col-span-5 space-y-4 bg-sf-bg-elevated p-6 rounded-2xl border border-sf-border shadow-sm">
-						<h3 className="font-serif text-lg font-medium text-sf-fg flex items-center gap-1.5 pb-3 border-b border-sf-border">
+						<h3 className="font-serif text-lg font-bold text-sf-fg flex items-center gap-1.5 pb-3 border-b border-sf-border">
 							<MessageSquare className="h-5 w-5 text-[#C49B83]" />
 							Gửi Đánh Giá Của Bạn
 						</h3>
@@ -533,17 +537,17 @@ export function ContactUs() {
 									>
 										<div className="flex justify-between items-start">
 											<div>
-												<span className="text-sm font-bold text-sf-fg uppercase tracking-wider block">
+												<span className="text-lg font-bold text-sf-fg uppercase tracking-wider block">
 													{f.name}
 												</span>
 												{/* Hiển thị sao của người dùng */}
 												{renderStars(f.rating)}
 											</div>
-											<span className="text-xs text-[#A0A0A0] mt-1">
+											<span className="text-sm text-sf-fg-muted mt-1">
 												{f.date}
 											</span>
 										</div>
-										<p className="text-sm text-[#666666] dark:text-[#A0A0A0] font-light leading-relaxed">
+										<p className="text-base text-sf-fg-muted leading-relaxed">
 											&quot;{f.comment}&quot;
 										</p>
 									</div>
