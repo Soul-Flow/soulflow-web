@@ -291,7 +291,7 @@ export function FlowerDetails({ productId }: FlowerDetailsProps) {
 										className="h-full w-full object-cover"
 										referrerPolicy="no-referrer"
 										fill
-										sizes="80px"
+										sizes=" (max-width: 640px) 80px, 64px"
 									/>
 								</button>
 							);
@@ -562,13 +562,14 @@ export function FlowerDetails({ productId }: FlowerDetailsProps) {
 							}}
 							className="group cursor-pointer overflow-hidden rounded-xl border border-[#C49B83]/30 bg-sf-bg-elevated p-3 shadow-xs hover:shadow-sm hover:-translate-y-1 transition-all"
 						>
-							<div className="aspect-square w-full overflow-hidden rounded-lg bg-[#EBE5DA] dark:bg-[#2C2C2C] grayscale-1/10 group-hover:grayscale-0">
+							<div className="relative aspect-square w-full overflow-hidden rounded-lg bg-[#EBE5DA] dark:bg-[#2C2C2C] grayscale-1/10 group-hover:grayscale-0">
 								<Image
 									src={item.image}
 									alt={item.name}
 									className="h-full w-full object-cover group-hover:scale-103 transition-transform"
 									referrerPolicy="no-referrer"
 									fill
+									sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
 								/>
 							</div>
 							<div className="mt-3 text-left">

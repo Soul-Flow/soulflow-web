@@ -1,24 +1,21 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import {
 	ChevronLeft,
 	ChevronRight,
 	Filter,
-	Link,
 	Plus,
 	SlidersHorizontal,
 	Star,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { boutiqueRoutes } from "@/lib/boutique/routes";
 import { useBoutiqueStore } from "@/store/boutique-store";
 
 export function FlowerCatalog() {
-	const router = useRouter();
 	const {
 		flowers,
 		addToCart,
@@ -190,7 +187,7 @@ export function FlowerCatalog() {
 							{/* Product Card Image Frame */}
 							<Link
 								className="relative aspect-square w-full filter brightness-100 group-hover:brightness-105 overflow-hidden rounded-lg bg-sf-surface"
-								onClick={() => router.push(boutiqueRoutes.product(flower.id))}
+								href={boutiqueRoutes.product(flower.id)}
 							>
 								<Image
 									src={flower.image}
@@ -219,9 +216,7 @@ export function FlowerCatalog() {
 
 							{/* Text metadata */}
 							<div className="flex flex-col justify-between grow mt-4">
-								<Link
-									onClick={() => router.push(boutiqueRoutes.product(flower.id))}
-								>
+								<Link href={boutiqueRoutes.product(flower.id)}>
 									<span className="text-xs uppercase tracking-widest text-sf-accent font-bold">
 										{getCategoryLabel(flower.category)}
 									</span>
