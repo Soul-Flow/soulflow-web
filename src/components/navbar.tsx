@@ -100,18 +100,16 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 							}}
 							className="group flex items-center gap-3 text-left cursor-pointer"
 						>
-							{/* Modern Luxury Logo */}
-							<div className="relative flex h-9 w-9 items-center justify-center overflow-hidden rounded-2xl border border-sf-accent/20 bg-linear-to-br from-[#fdf8f6] via-[#f7ebe8] to-[#efe1dc] shadow-md transition-all duration-300 group-hover:scale-105 group-hover:shadow-lg">
-								{/* Flower petals */}
-								<div className="absolute h-4 w-4 rotate-45 rounded-full bg-sf-accent/80 blur-[1px]"></div>
-								<div className="absolute top-2 h-3 w-3 rounded-full bg-[#d4a373]/70"></div>
-								<div className="absolute bottom-2 h-3 w-3 rounded-full bg-[#e9c46a]/60"></div>
+							{/* The Blooming Petal Logo */}
+							<div className="relative flex h-12 w-12 cursor-pointer items-center justify-center overflow-hidden rounded-2xl border border-[#C49B83]/10 bg-white shadow-sm transition-all duration-500 hover:shadow-md group">
+								{/* 4 cánh hoa */}
+								<div className="absolute h-5 w-5 -translate-x-1.5 -translate-y-1.5 rounded-tr-full rounded-bl-full bg-[#C49B83]/20 transition-transform duration-500 group-hover:rotate-45 group-hover:bg-[#C49B83]/40"></div>
+								<div className="absolute h-5 w-5 translate-x-1.5 -translate-y-1.5 rounded-tl-full rounded-br-full bg-[#C49B83]/30 transition-transform duration-500 group-hover:-rotate-45 group-hover:bg-[#C49B83]/50"></div>
+								<div className="absolute h-5 w-5 -translate-x-1.5 translate-y-1.5 rounded-tl-full rounded-br-full bg-[#C49B83]/40 transition-transform duration-500 group-hover:-rotate-45 group-hover:bg-[#C49B83]/60"></div>
+								<div className="absolute h-5 w-5 translate-x-1.5 translate-y-1.5 rounded-tr-full rounded-bl-full bg-[#C49B83]/50 transition-transform duration-500 group-hover:rotate-45 group-hover:bg-[#C49B83]/70"></div>
 
-								{/* Center sparkle */}
-								<div className="relative z-10 h-1.5 w-1.5 rounded-full bg-white shadow-sm"></div>
-
-								{/* Decorative ring */}
-								<div className="absolute inset-1 rounded-xl border border-white/40"></div>
+								{/* Nhụy hoa trung tâm */}
+								<div className="relative z-10 h-2 w-2 scale-100 rounded-full border border-[#C49B83] bg-white shadow-sm transition-transform group-hover:scale-125"></div>
 							</div>
 
 							{/* Brand text */}

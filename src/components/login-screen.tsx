@@ -10,11 +10,7 @@ import { soulFlowRoutes } from "@/lib/soulflow/routes";
 import { authService } from "@/services/authService";
 import { useSoulFlowStore } from "@/store/soulflow-store";
 
-export function LoginScreen({
-	onSuccessToast,
-}: {
-	onSuccessToast: (message: string) => void;
-}) {
+export function LoginScreen() {
 	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
@@ -37,8 +33,10 @@ export function LoginScreen({
 			// Lấy được data về thì quăng vào Store
 			setUser(userData);
 
-			toast.success("Đăng nhập thành công!", { id: toastId });
-			onSuccessToast(`Chào mừng ${userName} đã trở lại với SoulFlow!`);
+			toast.success(
+				`Đăng nhập thành công!, Chào mừng ${userName} đã trở lại với SoulFlow!`,
+				{ id: toastId },
+			);
 			router.push(soulFlowRoutes.home);
 		} catch {
 			toast.error("Sai tài khoản hoặc mật khẩu!", { id: toastId });
@@ -48,31 +46,32 @@ export function LoginScreen({
 	};
 
 	return (
-		<div className="w-full min-h-[85vh] md:min-h-175 bg-white rounded-2xl overflow-hidden shadow-xl border border-amber-50 border-outline-variant/30 grid grid-cols-1 md:grid-cols-12">
+		<div className="w-full min-h-[85vh] md:min-h-175 bg-sf-bg rounded-2xl overflow-hidden shadow-xl border border-outline-variant/30 grid grid-cols-1 md:grid-cols-12">
 			{/* Cột Trái: Trải nghiệm thương hiệu (Màn Hình 1) */}
-			<section className="hidden md:flex md:col-span-6 relative overflow-hidden bg-[#e0d8cc]/30 min-h-137.5">
+			<section className="hidden md:flex md:col-span-6 relative overflow-hidden bg-sf-bg min-h-137.5">
 				{/* Lớp nền ảnh bông hoa mờ sương sang trọng */}
 				<div className="absolute inset-0 z-0">
 					<Image
-						src="https://lh3.googleusercontent.com/aida/ADBb0uh3QWKnXCyccbmrPhVoBvd3615arm2G9rZOvSX1uXQIKMOf6lWqWqkC1o-4Q4E7Z9Wk41Nb5Pln6B8eX7k8urfMmexFmz7D6DzVvggBDuvkT0aNzBH30NvXnVzkDp3Ixj6zi7gc4Tcy8hdt1SMrtq5DTZOfKf6006B-vsy4HoY4G3QBrWQh7BwciMpG8VufOG6ARBFuhaK6uKkfjLFKEiEJ8AA5N-rVTrBBogJadovP7Rml4DHsC6X_d7o"
+						src="/images/login-bg.jpg"
 						alt="SoulFlow Botanical Artistry"
 						className="w-full h-full object-cover transform scale-105 hover:scale-100 transition-transform duration-3000 ease-out"
-						referrerPolicy="no-referrer"
 						fill
-						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+						sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 100vw"
 						loading="eager"
+						quality={75}
+						priority
 					/>
 					{/* Floral overlay gradient */}
-					<div className="absolute inset-0 bg-gradient-to-hb from-[#fcfaf7]/20 to-[#e0d8cc]/60 z-10" />
+					{/* <div className="absolute inset-0 bg-gradient-to-hb from-[#fcfaf7]/20 to-[#e0d8cc]/60 z-10" /> */}
 				</div>
 
 				{/* Nội dung thương hiệu */}
-				<div className="relative z-20 flex flex-col justify-between p-12 w-full text-[#111c2d]">
+				<div className="relative z-20 flex flex-col justify-between p-12 w-full text-[#f8f8f8]">
 					<div>
-						<span className="text-xs uppercase tracking-[0.2em] text-primary/80 font-semibold mb-2 block">
+						<span className="text-xs text-[#FFC8A3] uppercase tracking-[0.2em] text-primary/80 font-semibold mb-2 block">
 							Flower Shop Portal
 						</span>
-						<h2 className="font-serif text-5xl font-light text-primary tracking-tight">
+						<h2 className="font-serif text-[#C49B83] text-5xl font-light text-primary tracking-tight">
 							SoulFlow
 						</h2>
 						<p className="font-sans text-md text-secondary max-w-sm mt-6 italic font-light leading-relaxed">
@@ -91,7 +90,7 @@ export function LoginScreen({
 			</section>
 
 			{/* Cột Phải: Form Đăng Nhập */}
-			<section className="col-span-12 md:col-span-6 flex flex-col justify-center p-8 sm:p-12 md:p-16 relative bg-white overflow-hidden">
+			<section className="col-span-12 md:col-span-6 flex flex-col justify-center p-8 sm:p-12 md:p-16 relative bg-sf-bg overflow-hidden">
 				{/* Logo trên thiết bị di động */}
 				<div className="md:hidden mb-8">
 					<h2 className="font-serif text-3xl text-primary tracking-tight">
@@ -101,10 +100,10 @@ export function LoginScreen({
 
 				<div className="w-full max-w-md space-y-8 relative z-10">
 					<header className="space-y-2">
-						<h3 className="font-serif text-3xl text-[#111c2d] font-light">
+						<h3 className="font-serif text-3xl text-sf-heading font-light">
 							Chào mừng trở lại!
 						</h3>
-						<p className="font-sans text-sm text-secondary/80 font-light">
+						<p className="font-sans text-sm text-secondary/80">
 							Vui lòng đăng nhập vào tài khoản của bạn để tiếp tục trải nghiệm
 							những sản phẩm và dịch vụ tuyệt vời từ SoulFlow.
 						</p>
@@ -114,7 +113,7 @@ export function LoginScreen({
 						{/* Trường Username */}
 						<div className="space-y-2 group">
 							<label
-								className="block text-xs uppercase tracking-widest font-semibold text-secondary/90 transition-colors group-focus-within:text-primary"
+								className="block text-xs uppercase tracking-widest font-semibold text-secondary/90 transition-colors group-focus-within:text-primary bg-sf"
 								htmlFor="login-username"
 							>
 								Username
@@ -127,7 +126,7 @@ export function LoginScreen({
 									placeholder="Enter your username"
 									value={username}
 									onChange={(e) => setUsername(e.target.value)}
-									className="w-full bg-transparent pl-7 pr-4 text-sm text-[#111c2d] placeholder-secondary/30 focus:outline-none border-0"
+									className="pl-7 pr-4 text-sm placeholder-secondary/30 border-0 w-full bg-white/5 py-2.5 px-0 focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
 							</div>
@@ -162,7 +161,7 @@ export function LoginScreen({
 									placeholder="••••••••"
 									value={password}
 									onChange={(e) => setPassword(e.target.value)}
-									className="w-full bg-transparent pl-7 pr-10 text-sm text-[#111c2d] placeholder-secondary/30 focus:outline-none border-0"
+									className="pl-7 pr-4 text-sm placeholder-secondary/30 border-0 w-full bg-white/5 py-2.5 px-0 focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
 								<button
@@ -199,7 +198,7 @@ export function LoginScreen({
 							<button
 								type="submit"
 								disabled={isLoading}
-								className="w-full py-3.5 bg-primary bg-[#C49B83] hover:bg-[#c57e55] text-sf-fg text-xs font-semibold uppercase tracking-[0.2em] rounded-lg shadow-login hover:shadow-lg transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-2"
+								className="w-full py-3.5 bg-primary bg-[#be754b] hover:bg-[#c3632b] text-sf-fg text-xs font-semibold uppercase tracking-[0.2em] rounded-lg shadow-login hover:shadow-lg transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-2"
 							>
 								{isLoading ? (
 									<span className="flex items-center gap-2">
@@ -219,8 +218,8 @@ export function LoginScreen({
 							Chưa có tài khoản?{" "}
 							<button
 								type="button"
-								onClick={() => console.log("Chuyển đến trang đăng ký")}
-								className="font-semibold text-primary hover:underline underline-offset-4 decoration-primary/30 transition-all ml-1 text-xs"
+								onClick={() => router.push(soulFlowRoutes.register)}
+								className="font-semibold text-primary hover:underline hover:cursor-pointer underline-offset-4 decoration-primary/30 transition-all ml-1 text-xs"
 							>
 								Tạo Tài Khoản
 							</button>

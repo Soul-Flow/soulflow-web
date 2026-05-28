@@ -201,7 +201,7 @@ export function Hero() {
 									{p.title}
 								</h3>
 
-								<p className="text-xs text-sf-fg-muted font-light leading-relaxed">
+								<p className="text-sm text-sf-fg-muted font-light leading-relaxed">
 									{p.desc}
 								</p>
 							</div>

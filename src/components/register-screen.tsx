@@ -2,7 +2,7 @@
 
 import { ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import type React from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -18,6 +18,8 @@ export function RegisterScreen() {
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [subscribeNewsletter, setSubscribeNewsletter] = useState(true);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const router = useRouter();
 
 	const handleSubmit = (e: React.FormEvent) => {
 		const showToast = (message: string, type: "success" | "error") => {
@@ -52,16 +54,16 @@ export function RegisterScreen() {
 	};
 
 	return (
-		<div className="w-full min-h-[85vh] md:min-h-175 bg-transparent grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+		<div className="w-full min-h-[85vh] md:min-h-175 bg-sf-bg-elevated grid grid-cols-1 lg:grid-cols-12 gap-12 items-center p-4 sm:p-6 md:p-8">
 			{/* Cột Trái: Nội dung Editorial (Màn Hình 2) */}
-			<section className="lg:col-span-6 space-y-8 text-center lg:text-left">
+			<section className="lg:col-span-6 space-y-8 text-center lg:text-left ml-30 mb-60">
 				<div className="space-y-4">
 					<span className="text-primary font-semibold text-xs uppercase tracking-[0.3em] block">
 						Bắt đầu hành trình của bạn với SoulFlow
 					</span>
-					<h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-[#111c2d] leading-tight select-none">
+					<h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light text-sf-heading leading-tight select-none">
 						Nơi những loài <br />
-						<span className="font-light italic text-primary">Petal</span> Kể
+						<span className="font-bold italic text-primary">Hoa</span> Kể
 						Chuyện.
 					</h1>
 					<p className="font-sans text-sm sm:text-base text-secondary/80 max-w-md mx-auto lg:mx-0 leading-relaxed font-light">
@@ -83,32 +85,17 @@ export function RegisterScreen() {
 							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
 						/>
 					</div>
-
-					{/* Huy hiệu thành viên (Glassmorphism Float) */}
-					<div className="absolute -bottom-6 -right-6 glass-panel p-5 rounded-2xl shadow-lg border border-white/60 flex items-center gap-3 animate-bounce-slow">
-						<div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-							<Sparkles className="w-5 h-5 fill-primary/10" />
-						</div>
-						<div>
-							<p className="font-sans text-xs font-semibold text-[#111c2d]">
-								Member Perks
-							</p>
-							<p className="text-[10px] uppercase tracking-widest text-primary font-bold">
-								Botanical Curation
-							</p>
-						</div>
-					</div>
 				</div>
 			</section>
 
 			{/* Cột Phải: Form Đăng ký */}
-			<section className="lg:col-span-6 xl:col-start-8 xl:col-span-5">
-				<div className="glass-panel p-8 sm:p-12 rounded-2xl border border-outline-variant/30 shadow-xl relative overflow-hidden bg-white/95">
+			<section className="lg:col-span-6 bg-sf-bg-elevated xl:col-start-8 xl:col-span-5">
+				<div className="glass-panel p-8 sm:p-12 rounded-2xl border-2 border-outline-variant/30  border-[#C49B83]/30 shadow-xl relative overflow-hidden bg-sf-bg-elevated">
 					<div className="mb-8">
-						<h2 className="font-serif text-3xl font-light text-[#111c2d] mb-2">
-							Create Account
+						<h2 className="font-serif text-3xl font-light text-sf-heading mb-2">
+							Tạo Tài Khoản Mới
 						</h2>
-						<p className="font-sans text-sm text-secondary/80 font-light">
+						<p className="font-sans text-base text-secondary/80 text-sf-fg font-light">
 							Chúng tôi rất vui được chào đón bạn đến với cộng đồng SoulFlow!
 							Hãy điền thông tin bên dưới để bắt đầu hành trình khám phá vẻ đẹp
 							của thiên nhiên cùng chúng tôi.
@@ -131,7 +118,7 @@ export function RegisterScreen() {
 									placeholder="Evelyn Rose"
 									value={fullName}
 									onChange={(e) => setFullName(e.target.value)}
-									className="w-full bg-transparent border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-[#111c2d]"
+									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
 							</div>
@@ -150,7 +137,7 @@ export function RegisterScreen() {
 									placeholder="evelyn@example.com"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									className="w-full bg-transparent border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-[#111c2d]"
+									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
 							</div>
@@ -169,7 +156,7 @@ export function RegisterScreen() {
 									placeholder="090 123 4567"
 									value={phone}
 									onChange={(e) => setPhone(e.target.value)}
-									className="w-full bg-transparent border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-[#111c2d]"
+									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
 							</div>
@@ -188,7 +175,7 @@ export function RegisterScreen() {
 									placeholder="evelyn_rose"
 									value={username}
 									onChange={(e) => setUsername(e.target.value)}
-									className="w-full bg-transparent border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-[#111c2d]"
+									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
 							</div>
@@ -207,7 +194,7 @@ export function RegisterScreen() {
 									placeholder="123 Flower St, District 1"
 									value={address}
 									onChange={(e) => setAddress(e.target.value)}
-									className="w-full bg-transparent border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-[#111c2d]"
+									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
 							</div>
@@ -227,7 +214,7 @@ export function RegisterScreen() {
 										placeholder="••••••••"
 										value={password}
 										onChange={(e) => setPassword(e.target.value)}
-										className="w-full bg-transparent border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-[#111c2d]"
+										className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 										required
 									/>
 								</div>
@@ -244,7 +231,7 @@ export function RegisterScreen() {
 										placeholder="••••••••"
 										value={confirmPassword}
 										onChange={(e) => setConfirmPassword(e.target.value)}
-										className="w-full bg-transparent border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-[#111c2d]"
+										className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 										required
 									/>
 								</div>
@@ -282,7 +269,7 @@ export function RegisterScreen() {
 							<button
 								type="submit"
 								disabled={isLoading}
-								className="w-full bg-primary hover:bg-primary-hover text-white text-xs font-bold uppercase tracking-widest py-4 rounded-xl shadow-lg hover:shadow-xl active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+								className="w-full py-3.5 bg-primary bg-[#be754b] hover:bg-[#c3632b] text-sf-fg text-xs font-semibold uppercase tracking-[0.2em] rounded-lg shadow-login hover:shadow-lg transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-2"
 							>
 								{isLoading ? (
 									<span>ĐANG ĐĂNG KÝ...</span>
@@ -303,7 +290,7 @@ export function RegisterScreen() {
 							<button
 								type="button"
 								onClick={() => router.push(soulFlowRoutes.login)}
-								className="text-primary font-semibold hover:underline decoration-primary/30 underline-offset-4 transition-all"
+								className="text-primary font-semibold hover:underline hover:cursor-pointer decoration-primary/30 underline-offset-4 transition-all"
 							>
 								Đăng nhập tại đây
 							</button>

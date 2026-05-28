@@ -2,61 +2,61 @@
 
 import {
 	CheckCircle2,
-	ChevronLeft,
-	ChevronRight,
+	//ChevronLeft,
+	//ChevronRight,
 	Clock,
 	Mail,
 	MapPin,
-	MessageSquare,
+	//MessageSquare,
 	Phone,
 	Send,
-	Star,
+	//Star,
 } from "lucide-react";
 import type React from "react";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
-// Dữ liệu mẫu (Gộp dữ liệu cũ của bạn và thêm vài đánh giá có nửa sao)
-const MOCK_FEEDBACKS = [
-	{
-		id: 1,
-		name: "Isabelle Laurent",
-		date: "May 14, 2026",
-		comment:
-			"The Sarah Bernhardt blush peonies survived beautifully for 8 days! Incredible grade.",
-		rating: 5,
-	},
-	{
-		id: 2,
-		name: "Viet Nguyen",
-		date: "Apr 28, 2026",
-		comment:
-			"Phục vụ tận tâm, thiết kế bó hoa bespoke màu Pastel rực rỡ và có chiều sâu.",
-		rating: 4.5,
-	},
-	{
-		id: 3,
-		name: "Sarah Connor",
-		date: "Apr 15, 2026",
-		rating: 5,
-		comment: "Mùi hương rất sang trọng, đúng phong cách Boutique.",
-	},
-	{
-		id: 4,
-		name: "Hải Đăng",
-		date: "Apr 10, 2026",
-		rating: 3.5,
-		comment:
-			"Hoa đẹp, tuy nhiên size Petite hơi nhỏ hơn một chút so với mình tưởng tượng.",
-	},
-	{
-		id: 5,
-		name: "Linda",
-		date: "Mar 22, 2026",
-		rating: 5,
-		comment:
-			"Sẽ ủng hộ shop dài dài. Dịch vụ gói quà và viết thiệp tay quá xuất sắc.",
-	},
-];
+// // Dữ liệu mẫu (Gộp dữ liệu cũ của bạn và thêm vài đánh giá có nửa sao)
+// const MOCK_FEEDBACKS = [
+// 	{
+// 		id: 1,
+// 		name: "Isabelle Laurent",
+// 		date: "May 14, 2026",
+// 		comment:
+// 			"The Sarah Bernhardt blush peonies survived beautifully for 8 days! Incredible grade.",
+// 		rating: 5,
+// 	},
+// 	{
+// 		id: 2,
+// 		name: "Viet Nguyen",
+// 		date: "Apr 28, 2026",
+// 		comment:
+// 			"Phục vụ tận tâm, thiết kế bó hoa bespoke màu Pastel rực rỡ và có chiều sâu.",
+// 		rating: 4.5,
+// 	},
+// 	{
+// 		id: 3,
+// 		name: "Sarah Connor",
+// 		date: "Apr 15, 2026",
+// 		rating: 5,
+// 		comment: "Mùi hương rất sang trọng, đúng phong cách Boutique.",
+// 	},
+// 	{
+// 		id: 4,
+// 		name: "Hải Đăng",
+// 		date: "Apr 10, 2026",
+// 		rating: 3.5,
+// 		comment:
+// 			"Hoa đẹp, tuy nhiên size Petite hơi nhỏ hơn một chút so với mình tưởng tượng.",
+// 	},
+// 	{
+// 		id: 5,
+// 		name: "Linda",
+// 		date: "Mar 22, 2026",
+// 		rating: 5,
+// 		comment:
+// 			"Sẽ ủng hộ shop dài dài. Dịch vụ gói quà và viết thiệp tay quá xuất sắc.",
+// 	},
+// ];
 
 export function ContactUs() {
 	// --- States Form Liên hệ ---
@@ -68,17 +68,17 @@ export function ContactUs() {
 	const [sent, setSent] = useState(false);
 
 	// --- States Form Đánh giá ---
-	const [feedbacks, setFeedbacks] = useState(MOCK_FEEDBACKS);
-	const [fbName, setFbName] = useState("");
-	const [fbComment, setFbComment] = useState("");
-	const [rating, setRating] = useState(5); // Điểm chọn (Hỗ trợ số thập phân)
-	const [hoverRating, setHoverRating] = useState(0); // Hiệu ứng hover
-	const [fbSuccess, setFbSuccess] = useState(false);
+	// const [feedbacks, setFeedbacks] = useState(MOCK_FEEDBACKS);
+	// const [fbName, setFbName] = useState("");
+	// const [fbComment, setFbComment] = useState("");
+	// const [rating, setRating] = useState(5); // Điểm chọn (Hỗ trợ số thập phân)
+	// const [hoverRating, setHoverRating] = useState(0); // Hiệu ứng hover
+	// const [fbSuccess, setFbSuccess] = useState(false);
 
-	// --- States Quản lý List Đánh giá ---
-	const [sortBy, setSortBy] = useState("newest");
-	const [currentPage, setCurrentPage] = useState(1);
-	const itemsPerPage = 3;
+	// // --- States Quản lý List Đánh giá ---
+	// const [sortBy, setSortBy] = useState("newest");
+	// const [currentPage, setCurrentPage] = useState(1);
+	// const itemsPerPage = 3;
 
 	// Xử lý gửi Form Liên hệ
 	const handleSubmitInquiry = (e: React.FormEvent) => {
@@ -96,91 +96,91 @@ export function ContactUs() {
 	};
 
 	// Xử lý gửi Đánh giá mới
-	const handlePostFeedback = (e: React.FormEvent) => {
-		e.preventDefault();
-		if (!fbName || !fbComment) return;
+	// const handlePostFeedback = (e: React.FormEvent) => {
+	// 	e.preventDefault();
+	// 	if (!fbName || !fbComment) return;
 
-		const newFeedback = {
-			id: Date.now(),
-			name: fbName,
-			date: new Date().toLocaleDateString("en-US", {
-				month: "short",
-				day: "numeric",
-				year: "numeric",
-			}),
-			comment: fbComment,
-			rating: rating,
-		};
+	// 	const newFeedback = {
+	// 		id: Date.now(),
+	// 		name: fbName,
+	// 		date: new Date().toLocaleDateString("en-US", {
+	// 			month: "short",
+	// 			day: "numeric",
+	// 			year: "numeric",
+	// 		}),
+	// 		comment: fbComment,
+	// 		rating: rating,
+	// 	};
 
-		setFeedbacks([newFeedback, ...feedbacks]);
-		setFbName("");
-		setFbComment("");
-		setRating(5);
-		setFbSuccess(true);
-		setTimeout(() => setFbSuccess(false), 3000);
-	};
+	// 	setFeedbacks([newFeedback, ...feedbacks]);
+	// 	setFbName("");
+	// 	setFbComment("");
+	// 	setRating(5);
+	// 	setFbSuccess(true);
+	// 	setTimeout(() => setFbSuccess(false), 3000);
+	// };
 
 	// --- Logic tính toán, phân trang, sắp xếp ---
-	const totalReviews = feedbacks.length;
-	const averageRating =
-		totalReviews === 0
-			? 0
-			: (
-					feedbacks.reduce((acc, curr) => acc + curr.rating, 0) / totalReviews
-				).toFixed(1);
+	// const totalReviews = feedbacks.length;
+	// const averageRating =
+	// 	totalReviews === 0
+	// 		? 0
+	// 		: (
+	// 				feedbacks.reduce((acc, curr) => acc + curr.rating, 0) / totalReviews
+	// 			).toFixed(1);
 
-	const sortedFeedbacks = useMemo(() => {
-		return [...feedbacks].sort((a, b) => {
-			if (sortBy === "newest")
-				return new Date(b.date).getTime() - new Date(a.date).getTime();
-			if (sortBy === "oldest")
-				return new Date(a.date).getTime() - new Date(b.date).getTime();
-			if (sortBy === "highest") return b.rating - a.rating;
-			if (sortBy === "lowest") return a.rating - b.rating;
-			return 0;
-		});
-	}, [feedbacks, sortBy]);
+	// const sortedFeedbacks = useMemo(() => {
+	// 	return [...feedbacks].sort((a, b) => {
+	// 		if (sortBy === "newest")
+	// 			return new Date(b.date).getTime() - new Date(a.date).getTime();
+	// 		if (sortBy === "oldest")
+	// 			return new Date(a.date).getTime() - new Date(b.date).getTime();
+	// 		if (sortBy === "highest") return b.rating - a.rating;
+	// 		if (sortBy === "lowest") return a.rating - b.rating;
+	// 		return 0;
+	// 	});
+	// }, [feedbacks, sortBy]);
 
-	const totalPages = Math.ceil(sortedFeedbacks.length / itemsPerPage);
-	const currentFeedbacks = sortedFeedbacks.slice(
-		(currentPage - 1) * itemsPerPage,
-		currentPage * itemsPerPage,
-	);
+	// const totalPages = Math.ceil(sortedFeedbacks.length / itemsPerPage);
+	// const currentFeedbacks = sortedFeedbacks.slice(
+	// 	(currentPage - 1) * itemsPerPage,
+	// 	currentPage * itemsPerPage,
+	// );
 
-	const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		setSortBy(e.target.value);
-		setCurrentPage(1); // Trở về trang 1 khi đổi bộ lọc
-	};
+	// const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+	// 	setSortBy(e.target.value);
+	// 	setCurrentPage(1); // Trở về trang 1 khi đổi bộ lọc
+	// };
 
-	// Hàm render hiển thị sao (hỗ trợ nửa sao)
-	const renderStars = (ratingValue: number, sizeClass = "h-3.5 w-3.5") => {
-		return (
-			<div className="flex gap-0.5 mt-1">
-				{[1, 2, 3, 4, 5].map((starIndex) => {
-					const isFull = ratingValue >= starIndex;
-					const isHalf =
-						ratingValue >= starIndex - 0.5 && ratingValue < starIndex;
+	// // Hàm render hiển thị sao (hỗ trợ nửa sao)
+	// const renderStars = (ratingValue: number, sizeClass = "h-3.5 w-3.5") => {
+	// 	return (
+	// 		<div className="flex gap-0.5 mt-1">
+	// 			{[1, 2, 3, 4, 5].map((starIndex) => {
+	// 				const isFull = ratingValue >= starIndex;
+	// 				const isHalf =
+	// 					ratingValue >= starIndex - 0.5 && ratingValue < starIndex;
 
-					return (
-						<div key={starIndex} className="relative inline-block">
-							<Star
-								className={`${sizeClass} text-[#EBE5DA] dark:text-gray-600`}
-							/>
-							{(isFull || isHalf) && (
-								<div
-									className={`absolute top-0 left-0 overflow-hidden ${isHalf ? "w-[50%]" : "w-full"}`}
-								>
-									<Star
-										className={`${sizeClass} fill-yellow-400 text-yellow-400`}
-									/>
-								</div>
-							)}
-						</div>
-					);
-				})}
-			</div>
-		);
-	};
+	// 				return (
+	// 					<div key={starIndex} className="relative inline-block">
+	// 						<Star
+	// 							className={`${sizeClass} text-[#EBE5DA] dark:text-gray-600`}
+	// 						/>
+	// 						{(isFull || isHalf) && (
+	// 							<div
+	// 								className={`absolute top-0 left-0 overflow-hidden ${isHalf ? "w-[50%]" : "w-full"}`}
+	// 							>
+	// 								<Star
+	// 									className={`${sizeClass} fill-yellow-400 text-yellow-400`}
+	// 								/>
+	// 							</div>
+	// 						)}
+	// 					</div>
+	// 				);
+	// 			})}
+	// 		</div>
+	// 	);
+	// };
 
 	return (
 		<div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 bg-sf-bg-elevated transition-colors duration-300">
