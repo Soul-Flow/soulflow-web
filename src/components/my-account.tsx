@@ -1,13 +1,13 @@
 "use client";
 
-import { Bell, CheckCircle, Shield, ShoppingBag, User } from "lucide-react";
+import { CheckCircle, Shield, ShoppingBag, User } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { useBoutiqueStore } from "@/store/soulflow-store";
+import { useSoulFlowStore } from "@/store/soulflow-store";
 
 export function MyAccount() {
-	const { user, updateUser, orders } = useBoutiqueStore();
+	const { user, updateUser, orders } = useSoulFlowStore();
 	const { resolvedTheme, setTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
@@ -20,12 +20,12 @@ export function MyAccount() {
 	}, []);
 
 	// Personal Info Form State
-	const [name, setName] = useState(user.name);
-	const [email, setEmail] = useState(user.email);
-	const [phone, setPhone] = useState(user.phone);
-	const [allowNotifications, setAllowNotifications] = useState(
-		user.allowNotifications,
-	);
+	const [fullName, setFullName] = useState(user?.fullName || ""); // Khởi tạo với giá trị từ store
+	const [email, setEmail] = useState(user?.email);
+	const [phone, setPhone] = useState(user?.phone);
+	// const [allowNotifications, setAllowNotifications] = useState(
+	// 	user.allowNotifications,
+	// );
 
 	// Security Password State
 	const [oldPassword, setOldPassword] = useState("");
@@ -35,7 +35,7 @@ export function MyAccount() {
 
 	const handleUpdateProfile = (e: React.FormEvent) => {
 		e.preventDefault();
-		updateUser({ name, email, phone, allowNotifications });
+		updateUser({ fullName, email, phone });
 		setUpdateFeedback(true);
 		setTimeout(() => setUpdateFeedback(false), 3000);
 	};
@@ -53,8 +53,8 @@ export function MyAccount() {
 			{/* Header Profile Summary cards */}
 			<div className="flex flex-col md:flex-row items-center gap-6 mb-12 p-6 rounded-2xl bg-sf-bg-elevated border border-sf-border shadow-sm">
 				<Image
-					src={user.avatar}
-					alt={user.name}
+					src={user?.avatar || "/default-avatar.png"}
+					alt={user?.fullName || "User Avatar"}
 					className="h-20 w-20 rounded-full object-cover grayscale brightness-105 border border-sf-border"
 					referrerPolicy="no-referrer"
 					width={80}
@@ -63,17 +63,17 @@ export function MyAccount() {
 				<div className="text-center md:text-left space-y-1.5 flex-1">
 					<div className="flex flex-wrap justify-center md:justify-start items-center gap-2">
 						<h1 className="font-serif text-2xl sm:text-3xl font-light text-sf-fg uppercase tracking-wide">
-							{user.name}
+							{user?.fullName}
 						</h1>
-						<span className="rounded-full bg-amber-50 dark:bg-amber-950/80 px-2.5 py-1 text-[8px] font-bold text-amber-700 dark:text-amber-300 uppercase tracking-widest shadow-xs">
+						{/* <span className="rounded-full bg-amber-50 dark:bg-amber-950/80 px-2.5 py-1 text-[8px] font-bold text-amber-700 dark:text-amber-300 uppercase tracking-widest shadow-xs">
 							{user.membershipLevel} MEMBER
-						</span>
+						</span> */}
 					</div>
 					<p className="text-xs text-[#666666] dark:text-[#A0A0A0] font-light">
 						Thành viên đăng ký từ{" "}
-						<strong className="font-semibold text-black dark:text-white">
+						{/* <strong className="font-semibold text-black dark:text-white">
 							{user.joinedDate}
-						</strong>
+						</strong> */}
 						.
 					</p>
 				</div>
@@ -123,8 +123,8 @@ export function MyAccount() {
 										id="user-profile-name"
 										type="text"
 										required
-										value={name}
-										onChange={(e) => setName(e.target.value)}
+										value={fullName}
+										onChange={(e) => setFullName(e.target.value)}
 										className="w-full text-xs rounded-lg border border-sf-border text-sf-fg p-3 outline-none focus:border-[#C49B83]"
 									/>
 								</div>
@@ -165,7 +165,7 @@ export function MyAccount() {
 							</div>
 
 							{/* Notification toggle switch */}
-							<div className="flex items-center justify-between p-3.5 rounded-xl border border-sf-border">
+							{/* <div className="flex items-center justify-between p-3.5 rounded-xl border border-sf-border">
 								<div className="space-y-0.5">
 									<span className="text-xs font-semibold text-sf-fg block items-center gap-1">
 										<Bell className="h-3.5 w-3.5 text-[#C49B83]" />
@@ -183,7 +183,7 @@ export function MyAccount() {
 									onChange={(e) => setAllowNotifications(e.target.checked)}
 									className="h-4.5 w-4.5 rounded border-[#C49B83] dark:border-[#222222] text-[#C49B83] focus:ring-[#C49B83] cursor-pointer"
 								/>
-							</div>
+							</div> */}
 
 							<div className="flex items-center justify-between pt-2">
 								<button

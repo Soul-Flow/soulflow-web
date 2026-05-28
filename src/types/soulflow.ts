@@ -44,7 +44,7 @@ export interface Order {
 }
 
 export interface UserProfile {
-	name: string;
+	fullName: string;
 	email: string;
 	phone: string;
 	membershipLevel: "Bronze" | "Silver" | "Gold" | "Platinum";
