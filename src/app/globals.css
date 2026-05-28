@@ -8,6 +8,8 @@
 	--sf-accent: #c49b83;
 	--sf-border: #ebe5da;
 	--sf-surface: #f3efe8;
+	--sf-heading: #111c2d;
+	--sf-hover-shadow: rgb(0 0 0 / 0.2);
 }
 
 .dark {
@@ -18,6 +20,8 @@
 	--sf-accent: #c49b83;
 	--sf-border: #222222;
 	--sf-surface: #111111;
+	--sf-heading: #c49b83;
+	--sf-hover-shadow: rgb(196 155 131 / 0.3);
 }
 
 @theme inline {
@@ -28,11 +32,13 @@
 	--color-sf-accent: var(--sf-accent);
 	--color-sf-border: var(--sf-border);
 	--color-sf-surface: var(--sf-surface);
+	--color-sf-heading: var(--sf-heading);
+	--color-sf-hover-shadow: var(--sf-hover-shadow);
 }
 
 html {
 	color-scheme: light;
-	font-size: 120%;
+	font-size: 118%;
 }
 html.dark {
 	color-scheme: dark;

@@ -2,23 +2,26 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { defaultFlowers } from "@/lib/data/default-flowers";
 import { defaultLocations } from "@/lib/data/default-locations";
+import type { UserFE } from "@/types/auth";
 import type {
-	BespokeConsultationResponse,
+	//BespokeConsultationResponse,
 	CartItem,
 	Flower,
 	FlowerSize,
 	Order,
 	UserProfile,
 	VietnamCity,
-} from "@/types/boutique";
+} from "@/types/soulflow";
 
-interface BoutiqueStoreState {
+interface SoulFlowStoreState {
 	cart: CartItem[];
 	addToCart: (flower: Flower, size: FlowerSize) => void;
 	removeFromCart: (cartItemId: string) => void;
 	updateCartQuantity: (cartItemId: string, quantity: number) => void;
 	clearCart: () => void;
-	user: UserProfile;
+	user: UserFE | null;
+	setUser: (userData: UserFE | null) => void;
+	clearUser: () => void;
 	updateUser: (profile: Partial<UserProfile>) => void;
 	orders: Order[];
 	placeOrder: (shippingDetails: {
@@ -34,15 +37,15 @@ interface BoutiqueStoreState {
 	fetchFlowers: () => Promise<void>;
 	locationData: VietnamCity[];
 	fetchLocationData: () => Promise<void>;
-	bespokeConsultationResult: BespokeConsultationResponse | null;
+	//bespokeConsultationResult: BespokeConsultationResponse | null;
 	loadingConsultation: boolean;
-	submitBespokeRequest: (requestData: {
-		budget: number;
-		tone: string;
-		occasion: string;
-		floristMessage: string;
-		includeArrangementVase: boolean;
-	}) => Promise<void>;
+	// submitBespokeRequest: (requestData: {
+	// 	budget: number;
+	// 	tone: string;
+	// 	occasion: string;
+	// 	floristMessage: string;
+	// 	includeArrangementVase: boolean;
+	// }) => Promise<void>;
 	couponCode: string;
 	appliedCoupon: { code: string; discountPercent: number } | null;
 	applyCoupon: (code: string) => boolean;
@@ -52,16 +55,16 @@ interface BoutiqueStoreState {
 	setSelectedCategory: (category: string) => void;
 }
 
-const defaultUser: UserProfile = {
-	name: "ELEANOR VANCE",
-	email: "eleanor.vance@vogue.fr",
-	phone: "+84 90 123 4567",
-	membershipLevel: "Gold",
-	joinedDate: "Jan 15, 2026",
-	avatar:
-		"https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
-	allowNotifications: true,
-};
+// const defaultUser: UserProfile = {
+// 	name: "ELEANOR VANCE",
+// 	email: "eleanor.vance@vogue.fr",
+// 	phone: "+84 90 123 4567",
+// 	membershipLevel: "Gold",
+// 	joinedDate: "Jan 15, 2026",
+// 	avatar:
+// 		"https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=200",
+// 	allowNotifications: true,
+// };
 
 const defaultOrders: Order[] = [
 	{
@@ -108,49 +111,49 @@ const defaultOrders: Order[] = [
 	},
 ];
 
-function buildFallbackConsultation(requestData: {
-	budget: number;
-	tone: string;
-}): BespokeConsultationResponse {
-	const tone = requestData.tone;
-	return {
-		bouquetName: `Maison Jardin: ${tone} Dreamscape`,
-		aestheticDescription: `A masterfully styled floral centerpiece customized to your requested setting, aligned with a budget of $${requestData.budget}.`,
-		suggestedBlooms: [
-			{
-				name:
-					tone === "Moody"
-						? "Black Pearl Rose"
-						: "Juliet Peach David Austin Rose",
-				reasoning:
-					"Gives the primary sculptural focus and sets the emotional anchor of the display.",
-				symbolism: "Sublime passion, mystery, and bespoke handcrafted luxury.",
-			},
-			{
-				name: "French Lace Hydrangeas",
-				reasoning: "Adds volume and texture while staying within budget.",
-				symbolism: "Grace, gratitude, and abundance.",
-			},
-			{
-				name: "Silver Eucalyptus Sprigs",
-				reasoning: "Creates natural movement and releases subtle oils.",
-				symbolism: "Healing pathways and wild resilience.",
-			},
-		],
-		floristGuideText:
-			"FLORIST CARE NOTE: Condition stems in fresh floral food before wiring the centerpiece in spiral form.",
-		moodPalette:
-			tone === "Pastel"
-				? ["#F7D6C8", "#E1E9D5", "#FFF5EA"]
-				: tone === "Vibrant"
-					? ["#D9381E", "#F2A03D", "#AA4B6B"]
-					: tone === "White/Neutral"
-						? ["#F4F1EA", "#D6D1C6", "#A2A997"]
-						: ["#2A1A1F", "#4C3B3F", "#141E30"],
-	};
-}
+// function buildFallbackConsultation(requestData: {
+// 	budget: number;
+// 	tone: string;
+// }): BespokeConsultationResponse {
+// 	const tone = requestData.tone;
+// 	return {
+// 		bouquetName: `Maison Jardin: ${tone} Dreamscape`,
+// 		aestheticDescription: `A masterfully styled floral centerpiece customized to your requested setting, aligned with a budget of $${requestData.budget}.`,
+// 		suggestedBlooms: [
+// 			{
+// 				name:
+// 					tone === "Moody"
+// 						? "Black Pearl Rose"
+// 						: "Juliet Peach David Austin Rose",
+// 				reasoning:
+// 					"Gives the primary sculptural focus and sets the emotional anchor of the display.",
+// 				symbolism: "Sublime passion, mystery, and bespoke handcrafted luxury.",
+// 			},
+// 			{
+// 				name: "French Lace Hydrangeas",
+// 				reasoning: "Adds volume and texture while staying within budget.",
+// 				symbolism: "Grace, gratitude, and abundance.",
+// 			},
+// 			{
+// 				name: "Silver Eucalyptus Sprigs",
+// 				reasoning: "Creates natural movement and releases subtle oils.",
+// 				symbolism: "Healing pathways and wild resilience.",
+// 			},
+// 		],
+// 		floristGuideText:
+// 			"FLORIST CARE NOTE: Condition stems in fresh floral food before wiring the centerpiece in spiral form.",
+// 		moodPalette:
+// 			tone === "Pastel"
+// 				? ["#F7D6C8", "#E1E9D5", "#FFF5EA"]
+// 				: tone === "Vibrant"
+// 					? ["#D9381E", "#F2A03D", "#AA4B6B"]
+// 					: tone === "White/Neutral"
+// 						? ["#F4F1EA", "#D6D1C6", "#A2A997"]
+// 						: ["#2A1A1F", "#4C3B3F", "#141E30"],
+// 	};
+// }
 
-export const useBoutiqueStore = create<BoutiqueStoreState>()(
+export const useSoulFlowStore = create<SoulFlowStoreState>()(
 	persist(
 		(set, get) => ({
 			cart: [],
@@ -201,9 +204,13 @@ export const useBoutiqueStore = create<BoutiqueStoreState>()(
 			},
 			clearCart: () => set({ cart: [] }),
 
-			user: defaultUser,
+			user: null, // Khởi tạo chưa đăng nhập
+			setUser: (userData: UserFE | null) => set({ user: userData }),
+			clearUser: () => set({ user: null }),
+
+			// Tạm thời dùng defaultUser để dễ test, sau này sẽ xóa đi khi có auth thực sự
 			updateUser: (profile) =>
-				set((state) => ({ user: { ...state.user, ...profile } })),
+				set({ user: { ...get().user, ...profile } as UserFE }),
 
 			orders: defaultOrders,
 			placeOrder: (details) => {
@@ -277,29 +284,29 @@ export const useBoutiqueStore = create<BoutiqueStoreState>()(
 
 			bespokeConsultationResult: null,
 			loadingConsultation: false,
-			submitBespokeRequest: async (requestData) => {
-				set({ loadingConsultation: true, bespokeConsultationResult: null });
-				try {
-					const response = await fetch("/api/gemini/consult", {
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify(requestData),
-					});
-					if (!response.ok) {
-						throw new Error("Consultation request failed");
-					}
-					const result = (await response.json()) as BespokeConsultationResponse;
-					set({
-						bespokeConsultationResult: result,
-						loadingConsultation: false,
-					});
-				} catch {
-					set({
-						loadingConsultation: false,
-						bespokeConsultationResult: buildFallbackConsultation(requestData),
-					});
-				}
-			},
+			// submitBespokeRequest: async (requestData) => {
+			// 	set({ loadingConsultation: true, bespokeConsultationResult: null });
+			// 	try {
+			// 		const response = await fetch("/api/gemini/consult", {
+			// 			method: "POST",
+			// 			headers: { "Content-Type": "application/json" },
+			// 			body: JSON.stringify(requestData),
+			// 		});
+			// 		if (!response.ok) {
+			// 			throw new Error("Consultation request failed");
+			// 		}
+			// 		const result = (await response.json()) as BespokeConsultationResponse;
+			// 		set({
+			// 			bespokeConsultationResult: result,
+			// 			loadingConsultation: false,
+			// 		});
+			// 	} catch {
+			// 		set({
+			// 			loadingConsultation: false,
+			// 			bespokeConsultationResult: buildFallbackConsultation(requestData),
+			// 		});
+			// 	}
+			// },
 
 			couponCode: "",
 			appliedCoupon: null,

@@ -1,7 +1,7 @@
 "use client";
 
 import { type ReactNode, useEffect } from "react";
-import { useBoutiqueStore } from "@/store/boutique-store";
+import { useSoulFlowStore } from "@/store/soulflow-store";
 
 type BoutiqueProvidersProps = {
 	children: ReactNode;
@@ -9,8 +9,8 @@ type BoutiqueProvidersProps = {
 
 /** Loads catalog and location data once on the client after hydration. */
 export function BoutiqueProviders({ children }: BoutiqueProvidersProps) {
-	const fetchFlowers = useBoutiqueStore((state) => state.fetchFlowers);
-	const fetchLocationData = useBoutiqueStore(
+	const fetchFlowers = useSoulFlowStore((state) => state.fetchFlowers);
+	const fetchLocationData = useSoulFlowStore(
 		(state) => state.fetchLocationData,
 	);
 
