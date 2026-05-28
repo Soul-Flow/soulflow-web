@@ -1,4 +1,4 @@
-import type { VietnamCity } from "@/types/boutique";
+import type { VietnamCity } from "@/types/soulflow";
 
 export const defaultLocations: VietnamCity[] = [
 	{

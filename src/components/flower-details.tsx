@@ -18,9 +18,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { boutiqueRoutes } from "@/lib/boutique/routes";
-import { useBoutiqueStore } from "@/store/boutique-store";
-import type { FlowerSize } from "@/types/boutique";
+import { soulFlowRoutes } from "@/lib/soulflow/routes";
+import { useSoulFlowStore } from "@/store/soulflow-store";
+import type { FlowerSize } from "@/types/soulflow";
 
 type FlowerDetailsProps = {
 	productId: string;
@@ -63,7 +63,7 @@ const MOCK_COMMENTS: CommentType[] = [
 
 export function FlowerDetails({ productId }: FlowerDetailsProps) {
 	const router = useRouter();
-	const { flowers, addToCart } = useBoutiqueStore();
+	const { flowers, addToCart } = useSoulFlowStore();
 	const [selectedSize, setSelectedSize] = useState<FlowerSize>("M");
 
 	const currentFlower =
@@ -201,7 +201,7 @@ export function FlowerDetails({ productId }: FlowerDetailsProps) {
 			{/* Return Page Trigger */}
 			<Link
 				id="detail-back-btn"
-				href={boutiqueRoutes.catalog}
+				href={soulFlowRoutes.catalog}
 				className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#666666] dark:text-[#A0A0A0] hover:text-[#C49B83] transition-colors duration-200 mb-8"
 			>
 				<ArrowLeft className="h-4 w-4 group-hover:-translate-x-1 transition-transform" />
@@ -317,7 +317,7 @@ export function FlowerDetails({ productId }: FlowerDetailsProps) {
 						{/* Simulated Live Pricing Display */}
 						<div className="flex items-center gap-4">
 							<span className="font-sans text-3xl font-bold text-sf-fg">
-								${price}
+								{price} VND
 							</span>
 							<span className="rounded-full bg-[#C49B83]/10 px-3 py-1 text-xs font-bold text-[#C49B83] uppercase tracking-widest">
 								Local Delivery Ready
@@ -339,7 +339,7 @@ export function FlowerDetails({ productId }: FlowerDetailsProps) {
 						</div>
 
 						{/* Size interactive Picker */}
-						<div className="space-y-3">
+						{/* <div className="space-y-3">
 							<span className="text-sm font-bold uppercase tracking-widest text-sf-fg block">
 								Select Display Size
 							</span>
@@ -371,14 +371,14 @@ export function FlowerDetails({ productId }: FlowerDetailsProps) {
 													{s.desc}
 												</p>
 												<p className="text-xs font-bold text-sf-fg mt-1">
-													${s.price}
+													{s.price} VND
 												</p>
 											</div>
 										</button>
 									);
 								})}
 							</div>
-						</div>
+						</div> */}
 					</div>
 
 					{/* Checkout/Add to Cart Actions */}
@@ -544,7 +544,7 @@ export function FlowerDetails({ productId }: FlowerDetailsProps) {
 					</h2>
 					<Link
 						id="detail-view-all-similar-btn"
-						href={boutiqueRoutes.catalog}
+						href={soulFlowRoutes.catalog}
 						className="text-xs font-bold text-[#C49B83] uppercase tracking-wider hover:underline"
 					>
 						Khám phá bộ sưu tập hoàn chỉnh
@@ -558,7 +558,7 @@ export function FlowerDetails({ productId }: FlowerDetailsProps) {
 							id={`detail-related-${item.id}`}
 							key={item.id}
 							onClick={() => {
-								router.push(boutiqueRoutes.product(item.id));
+								router.push(soulFlowRoutes.product(item.id));
 							}}
 							className="group cursor-pointer overflow-hidden rounded-xl border border-[#C49B83]/30 bg-sf-bg-elevated p-3 shadow-xs hover:shadow-sm hover:-translate-y-1 transition-all"
 						>

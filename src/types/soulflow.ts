@@ -53,25 +53,25 @@ export interface UserProfile {
 	allowNotifications: boolean;
 }
 
-export interface BespokeConsultationRequest {
-	budget: number;
-	tone: "Pastel" | "Vibrant" | "White/Neutral" | "Moody";
-	occasion: string;
-	floristMessage: string;
-	includeArrangementVase: boolean;
-}
+// export interface BespokeConsultationRequest {
+// 	budget: number;
+// 	tone: "Pastel" | "Vibrant" | "White/Neutral" | "Moody";
+// 	occasion: string;
+// 	floristMessage: string;
+// 	includeArrangementVase: boolean;
+// }
 
-export interface BespokeConsultationResponse {
-	bouquetName: string;
-	aestheticDescription: string;
-	suggestedBlooms: Array<{
-		name: string;
-		reasoning: string;
-		symbolism: string;
-	}>;
-	floristGuideText: string;
-	moodPalette: string[];
-}
+// export interface BespokeConsultationResponse {
+// 	bouquetName: string;
+// 	aestheticDescription: string;
+// 	suggestedBlooms: Array<{
+// 		name: string;
+// 		reasoning: string;
+// 		symbolism: string;
+// 	}>;
+// 	floristGuideText: string;
+// 	moodPalette: string[];
+// }
 
 export interface VietnamCity {
 	code: string;

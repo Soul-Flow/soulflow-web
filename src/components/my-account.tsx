@@ -4,7 +4,7 @@ import { Bell, CheckCircle, Shield, ShoppingBag, User } from "lucide-react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { useBoutiqueStore } from "@/store/boutique-store";
+import { useBoutiqueStore } from "@/store/soulflow-store";
 
 export function MyAccount() {
 	const { user, updateUser, orders } = useBoutiqueStore();

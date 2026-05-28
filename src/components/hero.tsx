@@ -4,11 +4,11 @@ import { ArrowRight, Filter, Leaf, Plus, Sparkles } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
-import { boutiqueRoutes } from "@/lib/boutique/routes";
-import { useBoutiqueStore } from "@/store/boutique-store";
+import { soulFlowRoutes } from "@/lib/soulflow/routes";
+import { useSoulFlowStore } from "@/store/soulflow-store";
 
 export function Hero() {
-	const { flowers, setSelectedCategory, addToCart } = useBoutiqueStore();
+	const { flowers, setSelectedCategory, addToCart } = useSoulFlowStore();
 
 	const budgetTiers = [
 		{
@@ -33,19 +33,19 @@ export function Hero() {
 
 	const brandPillars = [
 		{
-			icon: Sparkles,
-			title: "Tuyển Chọn Thủ Công",
-			desc: "Mỗi bông hoa được cắt tuyển kĩ lưỡng và liên kết hoàn hảo bởi thợ hoa chuyên môn cao.",
+			icon: Sparkles, // Giữ lại icon cũ
+			title: "Hoa Tươi Mỗi Ngày",
+			desc: "Cam kết sử dụng hoa tươi mới nhập về trong ngày, được chăm chút cẩn thận trước khi giao đến tay bạn.",
 		},
 		{
 			icon: Leaf,
-			title: "Trang Trại Bền Vững",
-			desc: "Hợp tác chặt chẽ cùng các nông trại hữu cơ thuần tự nhiên tại Đà Lạt và vùng Grasse, Pháp.",
+			title: "Nguồn Gốc Rõ Ràng",
+			desc: "Hoa được nhập trực tiếp từ các nhà vườn uy tín tại Đà Lạt và các khu vực lân cận, đảm bảo chất lượng.",
 		},
 		{
-			icon: Filter,
-			title: "Ngôn Ngữ Loài Hoa",
-			desc: "Lấy cảm hứng từ từ điển biểu trưng hoa thời Victoria thế kỷ 19 để truyền tải thông điệp sâu sắc.",
+			icon: Filter, // Hoặc đổi sang icon Heart/Smile nếu có
+			title: "Tận Tâm Phục Vụ",
+			desc: "Luôn lắng nghe nhu cầu của khách hàng để mang đến những sản phẩm hoa ưng ý và ý nghĩa nhất.",
 		},
 	];
 
@@ -92,10 +92,10 @@ export function Hero() {
 						transition={{ duration: 0.8 }}
 						className="lg:col-span-12 xl:col-span-7 space-y-6 text-center lg:text-left"
 					>
-						<div className="inline-flex items-center gap-2 rounded-full border border-(--sf-accent)/30 bg-sf-accent/10 px-3 py-1 text-sm font-bold tracking-widest uppercase text-sf-accent">
+						{/* <div className="inline-flex items-center gap-2 rounded-full border border-(--sf-accent)/30 bg-sf-accent/10 px-3 py-1 text-sm font-bold tracking-widest uppercase text-sf-accent">
 							<Sparkles className="h-3.5 w-3.5 animate-spin" />
 							NGHỆ THUẬT HOA THIẾT KẾ RIÊNG
-						</div>
+						</div> */}
 
 						<h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-light tracking-tight text-sf-fg leading-tight">
 							Hoa dành cho những
@@ -107,16 +107,15 @@ export function Hero() {
 
 						<p className="max-w-xl mx-auto lg:mx-0 text-sm sm:text-base text-sf-fg-muted font-light leading-relaxed">
 							Chào mừng bạn đến với{" "}
-							<span className="font-medium text-sf-fg">SoulFlow Boutique</span>,
-							nơi thời trang biểu diễn kết hợp tinh tế cùng nghệ thuật hoa châu
-							Âu. Chúng tôi lưu giữ thông điệp lãng mạn thông qua ngôn từ tinh
-							tế của cánh hoa tươi nguyên bản.
+							<span className="font-medium text-sf-fg">SoulFlow</span>, Chúng
+							tôi lưu giữ thông điệp lãng mạn thông qua ngôn từ tinh tế của cánh
+							hoa tươi nguyên bản.
 						</p>
 
 						<div className="flex flex-wrap justify-center lg:justify-start gap-4 pt-4">
 							<Link
 								id="hero-shop-now-btn"
-								href={boutiqueRoutes.catalog}
+								href={soulFlowRoutes.catalog}
 								onClick={() => setSelectedCategory("All")}
 								className="group flex items-center gap-2 rounded-full bg-sf-fg px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-sf-bg hover:bg-sf-accent hover:text-white transition-all duration-300 shadow-md cursor-pointer"
 							>
@@ -124,14 +123,14 @@ export function Hero() {
 								<ArrowRight className="h-4 w-4 group-hover:translate-x-1.5 transition-transform" />
 							</Link>
 
-							<Link
+							{/* <Link
 								id="hero-bespoke-btn"
-								href={boutiqueRoutes.bespoke}
+								href={soulFlowRoutes.bespoke}
 								className="flex items-center gap-2 rounded-full border border-sf-accent bg-transparent px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-sf-accent hover:bg-sf-accent/10 transition-colors duration-300 cursor-pointer"
 							>
 								Tư Vấn Thợ Hoa AI
 								<Sparkles className="h-4 w-4 text-sf-accent" />
-							</Link>
+							</Link> */}
 						</div>
 					</motion.div>
 
@@ -152,6 +151,7 @@ export function Hero() {
 									referrerPolicy="no-referrer"
 									fill
 									sizes="( max-width: 640px ) 100vw, ( max-width: 1280px ) 50vw, 33vw"
+									priority
 								/>
 							</div>
 							<div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent"></div>
@@ -250,7 +250,7 @@ export function Hero() {
 
 								<Link
 									id={`home-view-all-${cat.id.toLowerCase()}`}
-									href={boutiqueRoutes.catalog}
+									href={soulFlowRoutes.catalog}
 									onClick={() => setSelectedCategory(cat.id)}
 									className="group flex items-center gap-1.5 text-xs font-bold text-sf-accent hover:text-sf-fg uppercase tracking-widest transition-colors cursor-pointer"
 								>
@@ -270,7 +270,7 @@ export function Hero() {
 									>
 										{/* Image Area */}
 										<Link
-											href={boutiqueRoutes.product(flower.id)}
+											href={soulFlowRoutes.product(flower.id)}
 											className="relative block aspect-square w-full overflow-hidden rounded-lg bg-sf-surface"
 										>
 											<Image
@@ -293,7 +293,7 @@ export function Hero() {
 										{/* Metadata */}
 										<div className="flex flex-col justify-between grow mt-3">
 											<Link
-												href={boutiqueRoutes.product(flower.id)}
+												href={soulFlowRoutes.product(flower.id)}
 												className="block"
 											>
 												<h4 className="font-serif text-sm font-semibold text-sf-fg group-hover:text-sf-accent transition-colors line-clamp-1">
@@ -357,7 +357,7 @@ export function Hero() {
 					{budgetTiers.map((tier) => (
 						<Link
 							key={tier.label}
-							href={boutiqueRoutes.catalog}
+							href={soulFlowRoutes.catalog}
 							onClick={() => setSelectedCategory("All")}
 							className="block"
 						>

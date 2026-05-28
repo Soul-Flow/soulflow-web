@@ -1,9 +1,9 @@
-import { BoutiqueShell } from "@/components/boutique-shell";
+import { SoulFlowShell } from "@/components/boutique-shell";
 
-export default function BoutiqueLayout({
+export default function SoulFlowLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return <BoutiqueShell>{children}</BoutiqueShell>;
+	return <SoulFlowShell>{children}</SoulFlowShell>;
 }

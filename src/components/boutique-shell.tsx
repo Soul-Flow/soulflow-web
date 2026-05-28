@@ -7,11 +7,11 @@ import { CartDrawer } from "@/components/cart-drawer";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 
-type BoutiqueShellProps = {
+type SoulFlowShellProps = {
 	children: ReactNode;
 };
 
-export function BoutiqueShell({ children }: BoutiqueShellProps) {
+export function SoulFlowShell({ children }: SoulFlowShellProps) {
 	const pathname = usePathname();
 	const [isCartOpen, setIsCartOpen] = useState(false);
 

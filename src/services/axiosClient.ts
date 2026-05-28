@@ -1,16 +1,25 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_API_URL,
+	baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api",
 	headers: {
 		"Content-Type": "application/json",
 	},
+	// Thêm cái timeout để lỡ Backend sập thì FE không bị treo quay đều mãi
+	timeout: 10000,
 });
 
-// Chỗ này để sau này nhét Token vào (Interceptor)
+// Xử lý trước khi GỬI request đi (Nhét Token vào)
 axiosClient.interceptors.request.use(
 	(config) => {
-		// TODO: Gắn token vào header Authorization ở đây
+		// typeof window !== 'undefined' để đảm bảo code chỉ chạy trên trình duyệt (tránh lỗi SSR của Next.js)
+		if (typeof window !== "undefined") {
+			const token = localStorage.getItem("accessToken");
+			if (token && config.headers) {
+				// Nhét token vào chuẩn Bearer của JWT
+				config.headers.Authorization = `Bearer ${token}`;
+			}
+		}
 		return config;
 	},
 	(error) => {
@@ -18,13 +27,22 @@ axiosClient.interceptors.request.use(
 	},
 );
 
-// Chỗ này để xử lý lỗi đồng loạt (ví dụ: hết hạn token thì văng ra trang login)
+// Xử lý sau khi NHẬN response về (Bắt lỗi 401)
 axiosClient.interceptors.response.use(
 	(response) => {
+		// Chỉ lấy cái ruột data trả về cho code FE gọn nhẹ
 		return response.data;
 	},
 	(error) => {
-		// TODO: Xử lý lỗi 401, 403...
+		if (error.response?.status === 401) {
+			// Lỗi 401: Token hết hạn hoặc chưa đăng nhập
+			console.warn("Phiên đăng nhập hết hạn!");
+
+			// Tùy chọn: Tự động xóa token cũ và đá về trang chủ/login
+			if (typeof window !== "undefined") {
+				localStorage.removeItem("accessToken");
+			}
+		}
 		return Promise.reject(error);
 	},
 );
