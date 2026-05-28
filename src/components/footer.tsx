@@ -2,7 +2,7 @@
 
 import { ShieldCheck, Sparkles } from "lucide-react";
 import Link from "next/link";
-import { boutiqueRoutes } from "@/lib/boutique/routes";
+import { soulFlowRoutes } from "@/lib/soulflow/routes";
 
 export function Footer() {
 	return (
@@ -28,7 +28,7 @@ export function Footer() {
 							<li>
 								<Link
 									id="footer-btn-home"
-									href={boutiqueRoutes.home}
+									href={soulFlowRoutes.home}
 									className="hover:text-sf-accent text-sm transition-colors"
 								>
 									Trang Chủ
@@ -37,25 +37,25 @@ export function Footer() {
 							<li>
 								<Link
 									id="footer-btn-catalog"
-									href={boutiqueRoutes.catalog}
+									href={soulFlowRoutes.catalog}
 									className="hover:text-sf-accent text-sm transition-colors"
 								>
 									Danh Mục Sản Phẩm
 								</Link>
 							</li>
-							<li>
+							{/* <li>
 								<Link
 									id="footer-btn-bespoke"
-									href={boutiqueRoutes.bespoke}
+									href={soulFlowRoutes.bespoke}
 									className="hover:text-sf-accent text-sm transition-colors"
 								>
 									Dịch Vụ Đặt Hoa Theo Yêu Cầu
 								</Link>
-							</li>
+							</li> */}
 							<li>
 								<Link
 									id="footer-btn-contact"
-									href={boutiqueRoutes.contact}
+									href={soulFlowRoutes.contact}
 									className="hover:text-sf-accent text-sm transition-colors font-medium"
 								>
 									Liên Hệ Chúng Tôi
@@ -96,16 +96,16 @@ export function Footer() {
 				</div>
 
 				<div className="mt-12 border-t border-sf-border pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-sf-fg-muted">
-					<p>© 2026 SoulFlow Flower Boutique Vietnam. All rights reserved.</p>
+					<p>© 2026 SoulFlow Flower Vietnam. All rights reserved.</p>
 					<div className="flex gap-4">
 						<Link
-							href={boutiqueRoutes.privacy}
+							href={soulFlowRoutes.privacy}
 							className="hover:underline cursor-pointer"
 						>
 							Chính Sách Bảo Mật
 						</Link>
 						<Link
-							href={boutiqueRoutes.terms}
+							href={soulFlowRoutes.terms}
 							className="hover:underline cursor-pointer"
 						>
 							Điều Khoản Dịch Vụ

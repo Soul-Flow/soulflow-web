@@ -1,4 +1,4 @@
-import type { Flower } from "@/types/boutique";
+import type { Flower } from "@/types/soulflow";
 
 export const defaultFlowers: Flower[] = [
 	{

@@ -12,12 +12,12 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { boutiqueRoutes } from "@/lib/boutique/routes";
-import { useBoutiqueStore } from "@/store/boutique-store";
-import type { Order } from "@/types/boutique";
+import { soulFlowRoutes } from "@/lib/soulflow/routes";
+import { useSoulFlowStore } from "@/store/soulflow-store";
+import type { Order } from "@/types/soulflow";
 
 export function CheckoutForm() {
-	const { cart, placeOrder, locationData, appliedCoupon } = useBoutiqueStore();
+	const { cart, placeOrder, locationData, appliedCoupon } = useSoulFlowStore();
 
 	// Contact form state
 	const [recipientName, setRecipientName] = useState("Sarah Beauchamp");
@@ -180,7 +180,7 @@ export function CheckoutForm() {
 					<div className="pt-4">
 						<Link
 							id="checkout-receipt-back-btn"
-							href={boutiqueRoutes.home}
+							href={soulFlowRoutes.home}
 							className="inline-block px-6 py-3 rounded-full bg-amber-600 text-white dark:text-[#1A1A1A] text-xs font-bold uppercase tracking-widest hover:bg-[#C49B83] dark:hover:bg-[#C49B83] hover:text-white dark:hover:text-white transition-colors duration-200"
 						>
 							Tiếp Tục Khám Phá Cửa Hàng
@@ -475,13 +475,13 @@ export function CheckoutForm() {
 													<strong className="font-normal text-sf-fg">
 														Số Tài Khoản:
 													</strong>{" "}
-													50041808
+													00000000
 												</p>
 												<p>
 													<strong className="font-normal text-sf-fg">
 														Tên Chủ Tài Khoản:
 													</strong>{" "}
-													SOULFLOW FLOWER BOUTIQUE
+													SOULFLOW FLOWER SHOP
 												</p>
 
 												<button
@@ -586,7 +586,7 @@ export function CheckoutForm() {
 							<span>
 								Khi đặt hàng, bạn đã đồng ý với{" "}
 								<Link
-									href={boutiqueRoutes.terms}
+									href={soulFlowRoutes.terms}
 									target="_blank"
 									rel="noopener noreferrer"
 									className="text-[#C49B83] hover:underline"

@@ -12,8 +12,8 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { boutiqueRoutes } from "@/lib/boutique/routes";
-import { useBoutiqueStore } from "@/store/boutique-store";
+import { soulFlowRoutes } from "@/lib/soulflow/routes";
+import { useSoulFlowStore } from "@/store/soulflow-store";
 
 export function FlowerCatalog() {
 	const {
@@ -23,7 +23,7 @@ export function FlowerCatalog() {
 		setSelectedCategory,
 		searchQuery,
 		setSearchQuery,
-	} = useBoutiqueStore();
+	} = useSoulFlowStore();
 
 	const [sortBy, setSortBy] = useState<string>("featured");
 	const [currentPage, setCurrentPage] = useState<number>(1);
@@ -187,7 +187,7 @@ export function FlowerCatalog() {
 							{/* Product Card Image Frame */}
 							<Link
 								className="relative aspect-square w-full filter brightness-100 group-hover:brightness-105 overflow-hidden rounded-lg bg-sf-surface"
-								href={boutiqueRoutes.product(flower.id)}
+								href={soulFlowRoutes.product(flower.id)}
 							>
 								<Image
 									src={flower.image}
@@ -195,6 +195,8 @@ export function FlowerCatalog() {
 									className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
 									referrerPolicy="no-referrer"
 									fill
+									loading="lazy"
+									sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
 								/>
 
 								{flower.popular && (
@@ -216,7 +218,7 @@ export function FlowerCatalog() {
 
 							{/* Text metadata */}
 							<div className="flex flex-col justify-between grow mt-4">
-								<Link href={boutiqueRoutes.product(flower.id)}>
+								<Link href={soulFlowRoutes.product(flower.id)}>
 									<span className="text-xs uppercase tracking-widest text-sf-accent font-bold">
 										{getCategoryLabel(flower.category)}
 									</span>
@@ -240,7 +242,7 @@ export function FlowerCatalog() {
 											Giá tuyển chọn
 										</span>
 										<span className="font-sans font-bold text-sf-fg text-base">
-											${flower.priceMedium}
+											{flower.priceMedium} VND
 										</span>
 									</div>
 

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
-import { BoutiqueProviders } from "@/providers/boutique-providers";
+import { Toaster } from "react-hot-toast";
+import { BoutiqueProviders } from "@/providers/soulflow-providers";
 import { ThemeProvider } from "@/providers/theme-provider";
 import "./globals.css";
 
@@ -15,9 +16,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-	title: "SoulFlow Boutique Florist",
+	title: "SoulFlow",
 	description:
-		"Bespoke botanical couture — luxury floral arrangements and AI-powered design consultations.",
+		"SoulFlow - Nơi kết nối tâm hồn và thiên nhiên. Khám phá bộ sưu tập thiết kế hoa độc đáo.",
 };
 
 export default function RootLayout({
@@ -31,10 +32,26 @@ export default function RootLayout({
 			className={`${inter.variable} ${playfair.variable} h-full antialiased`}
 			suppressHydrationWarning
 		>
-			{/* QUAN TRỌNG: Thêm bg-sf-bg và text-sf-fg vào body */}
 			<body className="min-h-full flex flex-col bg-sf-bg text-sf-fg transition-colors duration-300">
 				<ThemeProvider>
 					<BoutiqueProviders>{children}</BoutiqueProviders>
+					<Toaster
+						position="top-right"
+						toastOptions={{
+							style: {
+								background: "#2A2A2A",
+								color: "#fff",
+								borderRadius: "10px",
+								border: "1px solid #4A4A4A",
+							},
+							success: {
+								iconTheme: {
+									primary: "#4ade80",
+									secondary: "#fff",
+								},
+							},
+						}}
+					/>
 				</ThemeProvider>
 			</body>
 		</html>

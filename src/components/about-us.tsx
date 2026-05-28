@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { boutiqueRoutes } from "@/lib/boutique/routes"; // Giữ nguyên route của bạn
+import { soulFlowRoutes } from "@/lib/soulflow/routes"; // Giữ nguyên route của bạn
 
 export function AboutUs() {
 	const coreValues = [
@@ -53,26 +53,25 @@ export function AboutUs() {
 				</p>
 
 				{/* Hero Images Grid */}
-				<div className="grid grid-cols-1 md:grid-cols-3 gap-4 w-full">
-					<div className="overflow-hidden rounded-2xl md:col-span-2 aspect-video md:aspect-auto h-75 md:h-112.5">
-						<div className="relative overflow-hidden rounded-2xl md:col-span-2 aspect-video md:aspect-auto h-75 md:h-112.5">
-							<Image
-								src="https://images.unsplash.com/photo-1558350315-8aa00e8e4590?q=80&w=1200&auto=format&fit=crop"
-								alt="Florist working on a bouquet"
-								fill
-								className="object-cover hover:scale-105 transition-transform duration-700"
-							/>
-						</div>
+				<div className="flex flex-col md:grid md:grid-cols-3 gap-4 w-full">
+					<div className="relative w-full h-75 md:h-112.5 md:col-span-2 overflow-hidden rounded-2xl">
+						<Image
+							src="https://images.unsplash.com/photo-1558350315-8aa00e8e4590?q=80&w=1200&auto=format&fit=crop"
+							alt="Florist working on a bouquet"
+							fill
+							className="object-cover hover:scale-105 transition-transform duration-700"
+							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 66vw"
+							loading="eager"
+						/>
 					</div>
-					<div className="overflow-hidden rounded-2xl aspect-4/5 h-75 md:h-112.5 hidden md:block">
-						<div className="relative overflow-hidden rounded-2xl md:col-span-2 aspect-video md:aspect-auto h-75 md:h-112.5">
-							<Image
-								src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=800&auto=format&fit=crop"
-								alt="Beautiful floral arrangement details"
-								fill
-								className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-							/>
-						</div>
+					<div className="relative w-full h-75 md:h-112.5 overflow-hidden rounded-2xl">
+						<Image
+							src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=800&auto=format&fit=crop"
+							alt="Beautiful floral arrangement details"
+							fill
+							className="object-cover hover:scale-105 transition-transform duration-700"
+							sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 33vw"
+						/>
 					</div>
 				</div>
 			</section>
@@ -88,6 +87,7 @@ export function AboutUs() {
 									alt="Florist arranging flowers in a workshop"
 									fill
 									className="w-full h-full object-cover grayscale-20"
+									sizes="(max-width: 768px) 100vw, 50vw"
 								/>
 								{/* Overlay element */}
 								<div className="absolute inset-0 bg-[#C49B83]/10 mix-blend-multiply"></div>
@@ -113,8 +113,8 @@ export function AboutUs() {
 							</p>
 							<p>
 								Từ một xưởng thiết kế nhỏ, chúng tôi đã vươn lên thành một
-								Boutique Florist được yêu thích. Từng thiết kế tại đây đều thấm
-								đẫm sự trau chuốt, tỉ mỉ của những nghệ nhân tâm huyết nhất.
+								thương hiệu được yêu thích. Từng thiết kế tại đây đều thấm đẫm
+								sự trau chuốt, tỉ mỉ của những nghệ nhân tâm huyết nhất.
 							</p>
 							<p>
 								Không rập khuôn, không đại trà. Mỗi tác phẩm mang tên thương
@@ -138,7 +138,7 @@ export function AboutUs() {
 						đến trái tim.&quot;
 					</blockquote>
 					<p className="text-xs uppercase tracking-[0.2em] font-bold text-[#C49B83]">
-						— Trưởng Nhóm Thiết Kế (Boutique Founder)
+						— Founder of SoulFlow
 					</p>
 				</div>
 			</section>
@@ -193,7 +193,7 @@ export function AboutUs() {
 
 					<div className="relative z-10 w-full md:w-auto">
 						<Link
-							href={boutiqueRoutes.catalog}
+							href={soulFlowRoutes.catalog}
 							className="group flex w-full md:w-auto items-center justify-center gap-2 px-8 py-4 bg-[#C49B83] text-sf-fg rounded-xl text-sm font-bold uppercase tracking-widest hover:bg-[#A37B65] transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
 						>
 							Khám Phá Bộ Sưu Tập

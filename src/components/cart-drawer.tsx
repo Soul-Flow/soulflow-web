@@ -13,8 +13,8 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { boutiqueRoutes } from "@/lib/boutique/routes";
-import { useBoutiqueStore } from "@/store/boutique-store";
+import { soulFlowRoutes } from "@/lib/soulflow/routes";
+import { useSoulFlowStore } from "@/store/soulflow-store";
 
 type CartDrawerProps = {
 	isOpen: boolean;
@@ -29,7 +29,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 		updateCartQuantity,
 		appliedCoupon,
 		applyCoupon,
-	} = useBoutiqueStore();
+	} = useSoulFlowStore();
 
 	const [promoCode, setPromoCode] = useState("");
 	const [promoError, setPromoError] = useState(false);
@@ -264,7 +264,7 @@ export function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
 									type="button"
 									id="checkout-redirect-btn"
 									onClick={() => {
-										router.push(boutiqueRoutes.checkout);
+										router.push(soulFlowRoutes.checkout);
 										onClose();
 									}}
 									className="w-full flex items-center justify-center gap-2 rounded-xl bg-sf-fg py-4 text-xs font-bold uppercase tracking-widest text-sf-bg hover:bg-sf-accent hover:text-white transition-all duration-300 shadow-md mt-2"
