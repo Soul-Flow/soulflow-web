@@ -16,7 +16,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { ThemeToggle } from "@/components/theme-toggle";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { soulFlowRoutes } from "@/lib/soulflow/routes";
 import { useSoulFlowStore } from "@/store/soulflow-store";
 
@@ -382,7 +382,9 @@ export function Navbar({ onOpenCart }: NavbarProps) {
 										/>
 
 										<span className="hidden lg:inline text-sm font-bold tracking-widest text-sf-fg uppercase">
-											{user.fullName ? user.fullName.split(" ")[0] : "User"}
+											{user.fullName
+												? user.fullName.trim().split(" ").at(-1)
+												: "User"}
 										</span>
 									</Link>
 

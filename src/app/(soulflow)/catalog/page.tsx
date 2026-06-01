@@ -1,4 +1,4 @@
-import { FlowerCatalog } from "@/components/flower-catalog";
+import { FlowerCatalog } from "@/components/FlowerCatalog";
 
 export default function CatalogPage() {
 	return <FlowerCatalog />;
