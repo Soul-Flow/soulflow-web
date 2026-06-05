@@ -1,56 +1,61 @@
 "use client";
 
-import { ArrowRight, Sparkles } from "lucide-react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import type React from "react";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { soulFlowRoutes } from "@/lib/soulflow/routes";
+import { authService } from "@/services/authService";
+import {
+	type RegisterFormData,
+	registerValidator,
+} from "@/validations/auth.validator";
 
 export function RegisterScreen() {
-	const [fullName, setFullName] = useState("");
-	const [email, setEmail] = useState("");
-	const [phone, setPhone] = useState("");
-	const [username, setUsername] = useState("");
-	const [address, setAddress] = useState("");
-	const [password, setPassword] = useState("");
-	const [confirmPassword, setConfirmPassword] = useState("");
-	const [subscribeNewsletter, setSubscribeNewsletter] = useState(true);
-	const [isLoading, setIsLoading] = useState(false);
-
 	const router = useRouter();
+	const {
+		register,
+		handleSubmit: handleFormSubmit,
+		formState: { errors, isSubmitting },
+	} = useForm<RegisterFormData>({
+		resolver: zodResolver(registerValidator),
+		defaultValues: {
+			username: "",
+			email: "",
+			password: "",
+			confirmPassword: "",
+			phone: "",
+			fullName: "",
+			address: "",
+		},
+	});
 
-	const handleSubmit = (e: React.FormEvent) => {
-		const showToast = (message: string, type: "success" | "error") => {
-			if (type === "success") {
-				toast.success(message);
+	const onSubmit = async (data: RegisterFormData) => {
+		try {
+			await authService.register(data);
+			toast.success("Đăng ký thành công! Vui lòng đăng nhập.");
+			setTimeout(() => {
+				router.push(soulFlowRoutes.login);
+			}, 1000);
+		} catch (error) {
+			if (axios.isAxiosError(error)) {
+				toast.error(
+					error.response?.data?.message ||
+						"Đăng ký thất bại. Vui lòng thử lại.",
+				);
+			} else if (error instanceof Error) {
+				toast.error(error.message);
 			} else {
-				toast.error(message);
+				toast.error("Đã có lỗi xảy ra. Vui lòng thử lại.");
 			}
-		};
-		e.preventDefault();
-		if (
-			!fullName ||
-			!email ||
-			!username ||
-			!address ||
-			!password ||
-			!confirmPassword
-		)
-			return;
-
-		if (password !== confirmPassword) {
-			showToast("❌ Mật khẩu xác nhận không trùng khớp!", "error");
-			return;
 		}
-
-		setIsLoading(true);
-		// Simulate API registration
-		setTimeout(() => {
-			setIsLoading(false);
-			showToast(`🎉 Đăng ký thành công tài khoản: ${fullName}!`, "success");
-		}, 1200);
+	};
+	const onError = () => {
+		toast.error("Vui lòng kiểm tra lại thông tin đã nhập.");
 	};
 
 	return (
@@ -102,7 +107,10 @@ export function RegisterScreen() {
 						</p>
 					</div>
 
-					<form className="space-y-6" onSubmit={handleSubmit}>
+					<form
+						className="space-y-6"
+						onSubmit={handleFormSubmit(onSubmit, onError)}
+					>
 						<div className="space-y-5">
 							{/* fullname */}
 							<div className="space-y-1.5">
@@ -116,11 +124,15 @@ export function RegisterScreen() {
 									id="reg-name"
 									type="text"
 									placeholder="Evelyn Rose"
-									value={fullName}
-									onChange={(e) => setFullName(e.target.value)}
+									{...register("fullName")}
 									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
+								{errors.fullName && (
+									<p className="text-red-500 text-xs mt-1">
+										{errors.fullName.message}
+									</p>
+								)}
 							</div>
 
 							{/* Địa chỉ Email */}
@@ -135,11 +147,15 @@ export function RegisterScreen() {
 									id="reg-email"
 									type="email"
 									placeholder="evelyn@example.com"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
+									{...register("email")}
 									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
+								{errors.email && (
+									<p className="text-red-500 text-xs mt-1">
+										{errors.email.message}
+									</p>
+								)}
 							</div>
 
 							{/* Số Điện Thoại */}
@@ -154,11 +170,15 @@ export function RegisterScreen() {
 									id="reg-phone"
 									type="tel"
 									placeholder="090 123 4567"
-									value={phone}
-									onChange={(e) => setPhone(e.target.value)}
+									{...register("phone")}
 									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
+								{errors.phone && (
+									<p className="text-red-500 text-xs mt-1">
+										{errors.phone.message}
+									</p>
+								)}
 							</div>
 
 							{/* username */}
@@ -173,11 +193,15 @@ export function RegisterScreen() {
 									id="reg-username"
 									type="text"
 									placeholder="evelyn_rose"
-									value={username}
-									onChange={(e) => setUsername(e.target.value)}
+									{...register("username")}
 									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
+								{errors.username && (
+									<p className="text-red-500 text-xs mt-1">
+										{errors.username.message}
+									</p>
+								)}
 							</div>
 
 							{/* Address */}
@@ -192,11 +216,15 @@ export function RegisterScreen() {
 									id="reg-address"
 									type="text"
 									placeholder="123 Flower St, District 1"
-									value={address}
-									onChange={(e) => setAddress(e.target.value)}
+									{...register("address")}
 									className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 									required
 								/>
+								{errors.address && (
+									<p className="text-red-500 text-xs mt-1">
+										{errors.address.message}
+									</p>
+								)}
 							</div>
 
 							{/* Password Fields */}
@@ -212,11 +240,15 @@ export function RegisterScreen() {
 										id="reg-password"
 										type="password"
 										placeholder="••••••••"
-										value={password}
-										onChange={(e) => setPassword(e.target.value)}
+										{...register("password")}
 										className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 										required
 									/>
+									{errors.password && (
+										<p className="text-red-500 text-xs mt-1">
+											{errors.password.message}
+										</p>
+									)}
 								</div>
 								<div className="space-y-1.5">
 									<label
@@ -229,24 +261,27 @@ export function RegisterScreen() {
 										id="reg-confirm"
 										type="password"
 										placeholder="••••••••"
-										value={confirmPassword}
-										onChange={(e) => setConfirmPassword(e.target.value)}
+										{...register("confirmPassword")}
 										className="w-full bg-white/5 border-0 border-b border-outline-variant/60 py-2.5 px-0 text-sm focus:border-primary transition-all focus:outline-none placeholder-secondary/30 text-sf-fg"
 										required
 									/>
+									{errors.confirmPassword && (
+										<p className="text-red-500 text-xs mt-1">
+											{errors.confirmPassword.message}
+										</p>
+									)}
 								</div>
 							</div>
 						</div>
 
 						{/* Điều hướng nhận thư Bản tin */}
-						<div className="flex items-start gap-3 pt-2">
+						{/* <div className="flex items-start gap-3 pt-2">
 							<div className="flex h-5 items-center">
 								<input
 									id="newsletter"
 									name="newsletter"
 									type="checkbox"
-									checked={subscribeNewsletter}
-									onChange={(e) => setSubscribeNewsletter(e.target.checked)}
+									{...register("newsletter")}
 									className="h-4 w-4 rounded border-outline-variant text-primary focus:ring-primary accent-primary cursor-pointer"
 								/>
 							</div>
@@ -262,16 +297,16 @@ export function RegisterScreen() {
 									sưu tập mới.
 								</p>
 							</div>
-						</div>
+						</div> */}
 
 						{/* Nút Đăng ký */}
 						<div className="pt-2">
 							<button
 								type="submit"
-								disabled={isLoading}
+								disabled={isSubmitting}
 								className="w-full py-3.5 bg-primary bg-[#be754b] hover:bg-[#c3632b] text-sf-fg text-xs font-semibold uppercase tracking-[0.2em] rounded-lg shadow-login hover:shadow-lg transition-all duration-300 transform active:scale-[0.98] flex items-center justify-center gap-2"
 							>
-								{isLoading ? (
+								{isSubmitting ? (
 									<span>ĐANG ĐĂNG KÝ...</span>
 								) : (
 									<>

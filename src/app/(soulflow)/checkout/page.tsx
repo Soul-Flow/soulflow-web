@@ -1,4 +1,4 @@
-import { CheckoutForm } from "@/components/checkout-form";
+import { CheckoutForm } from "@/components/CheckoutForm";
 
 export default function CheckoutPage() {
 	return <CheckoutForm />;

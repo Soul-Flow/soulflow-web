@@ -2,7 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import { defaultFlowers } from "@/lib/data/default-flowers";
 import { defaultLocations } from "@/lib/data/default-locations";
-import type { UserFE } from "@/types/auth";
+import type { UserFE } from "@/types/auth.type";
 import type {
 	//BespokeConsultationResponse,
 	CartItem,

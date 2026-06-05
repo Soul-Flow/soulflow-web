@@ -15,11 +15,13 @@ export interface AuthResponseDTO {
 export interface UserResponseDTO {
 	pk: number;
 	username: string;
-	fullname: string;
+	fullName: string;
 	email: string;
 	photo: string | null;
 	phone: string;
 	address: string;
+	activated: boolean;
+	createDate: string;
 	rolePk: number;
 }
 
@@ -32,6 +34,8 @@ export interface UserFE {
 	avatar: string;
 	phone: string;
 	address: string;
+	activated: boolean;
+	createDate: string;
 	roleId: number;
 }
 
@@ -40,11 +44,13 @@ export const mapUserResponseToFE = (dto: UserResponseDTO): UserFE => {
 	return {
 		id: dto.pk,
 		username: dto.username,
-		fullName: dto.fullname,
+		fullName: dto.fullName,
 		email: dto.email,
 		avatar: dto.photo || "/images/avatar-placeholder.png", // Fallback ảnh mặc định
 		phone: dto.phone,
 		address: dto.address,
+		activated: dto.activated,
+		createDate: dto.createDate,
 		roleId: dto.rolePk,
 	};
 };
