@@ -3,9 +3,9 @@
 import { AnimatePresence, motion } from "motion/react";
 import { usePathname } from "next/navigation";
 import { type ReactNode, useState } from "react";
-import { CartDrawer } from "@/components/cart-drawer";
-import { Footer } from "@/components/footer";
-import { Navbar } from "@/components/navbar";
+import { CartDrawer } from "@/components/CartDrawer";
+import { Footer } from "@/components/Footer";
+import { Navbar } from "@/components/Navbar";
 
 type SoulFlowShellProps = {
 	children: ReactNode;

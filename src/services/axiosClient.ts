@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosClient = axios.create({
-	baseURL: process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080/api",
+	baseURL: process.env.NEXT_PUBLIC_API_URL,
 	headers: {
 		"Content-Type": "application/json",
 	},
@@ -31,7 +31,10 @@ axiosClient.interceptors.request.use(
 axiosClient.interceptors.response.use(
 	(response) => {
 		// Chỉ lấy cái ruột data trả về cho code FE gọn nhẹ
-		return response.data;
+		if (response && response.data) {
+			return response.data;
+		}
+		return response;
 	},
 	(error) => {
 		if (error.response?.status === 401) {

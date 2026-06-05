@@ -1,4 +1,4 @@
-import { FlowerDetails } from "@/components/flower-details";
+import { FlowerDetails } from "@/components/FlowerDetails";
 
 type ProductPageProps = {
 	params: Promise<{ id: string }>;
